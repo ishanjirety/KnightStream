@@ -1,0 +1,12 @@
+.video-card{
+    background-color:#fff;
+    height:auto;
+    display:flex;
+    height:17rem;
+    margin-top: 0.5rem;
+    box-shadow: var(--shadow-color) 1px 1px 3px;
+}
+.video{
+    width:100%;
+    height:11rem;   
+}

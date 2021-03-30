@@ -1,0 +1,54 @@
+/* Rubit Regular */
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+/* Merriweather regular */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap');
+
+/* Open Sans WT 200 */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+/* Roboto Thin WT 300 */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+/* Roboto Thin WT 100 */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+:root{
+  --background-color:#212121;
+}
+*:focus{
+  outline-color: transparent;
+  outline-width: 0;
+}
+.fa { font-family: 'FontAwesome' !important; }
+
+body{
+  margin:0;
+  padding: 0;
+  background-color: var(--background-color);
+  position: relative;
+ }
+ .heading{
+   color:white;
+   font-family: 'Roboto', sans-serif;
+   font-weight: bold;
+   font-size:1.5rem;
+   padding:1.5rem 0.7rem 1rem 0.7rem;
+   margin-top:0;
+   letter-spacing:0.2rem;
+   display:flex;
+   justify-content: center;
+   position: sticky;
+    top:0rem;
+    width:100%;
+    background-color: var(--nav-background);
+    z-index:var(--index-10);
+}
+.heading img{
+  margin-right: 0.3rem;
+}
+.main-body{
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  padding:1rem 1rem 5rem 1rem
+}
