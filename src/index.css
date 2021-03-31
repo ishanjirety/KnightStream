@@ -12,8 +12,6 @@
 /* Roboto Thin WT 100 */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 
-@import "../node_modules/video-react/dist/video-react.css";
-
 :root{
   --background-color:#212121;
   /* --heading-heading:# */
