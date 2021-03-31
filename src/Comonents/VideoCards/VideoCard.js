@@ -1,11 +1,10 @@
 import React from 'react'
-import './Videocard.css'
-export function Videocard() {
+import './Assets/css/Videocard.css'
+import ReactPlayer from 'react-player'
+export function Videocard(props) {
+    const {url} = props
     return (
-        <div className="video-card">
-            <iframe src="https://www.youtube.com/embed/Vr4MfMlKbnI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen className="video"></iframe>
-            <div className="video-heading"></div>
-        </div>
+        <iframe width="100%" height="150%"  src="https://www.youtube.com/embed/Ou31aDaE0nY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     )
 }
 

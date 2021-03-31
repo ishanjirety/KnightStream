@@ -1,30 +1,36 @@
 import {useState} from 'react'
 import './App.css';
-import {Nav,Videocard,Splashscreen,Playlistcard} from './Comonents'
-import playlist from './Common-Assets/Playlist.svg'
+import {Nav,Splashscreen} from './Comonents'
+import {Playlist,Home,Videodisplay} from './Pages'
+
+// Context
+import {useRoute} from './Context'
+ 
 function App() {
+
+  const arr =[1,2,3,4,5,6,7,8,9,10]
+
+  // Custom Hook
+  const {route} =useRoute()
+
+  // Set Splashscreen Anmation & Visibility
   const [splashScreen,setSplashscreen] = useState("")
   const [SplashscreenDisplay,setSplashscreenDisplay] = useState(true)
+
+  // Splash Screen Timeout
   setTimeout(()=>{
     setSplashscreen("fadeout")
     setTimeout(()=>setSplashscreenDisplay(false),4500)
-},4000)
+  },4000)
   
   return (
     <div className="App">
       <Nav/>
-      <div className="main-body">
-        <div className="heading"><img src={playlist}/>Playlists</div>
-       <Playlistcard source="https://i.ytimg.com/vi/KGMEhdaZ6ZY/maxresdefault.jpg" text="Lectures"/>
-      <Playlistcard source="https://pbs.twimg.com/media/DxslfAyX4AU1c0o.jpg" text="Tip & Tricks"/>
-      <Playlistcard source="https://i.ytimg.com/vi/jRmiVObwh8k/maxresdefault.jpg" text="Positional Chess"/>
-      <Playlistcard source="http://chessterra.com/wp-content/uploads/2019/07/tAEdKVLgURI-800x500.jpg" text="4 step ahead"/>
-      <Playlistcard source="https://i.ytimg.com/vi/KGMEhdaZ6ZY/maxresdefault.jpg" text="Lectures"/>
-      <Playlistcard source="https://pbs.twimg.com/media/DxslfAyX4AU1c0o.jpg" text="Tip & Tricks"/>
-      <Playlistcard source="https://i.ytimg.com/vi/jRmiVObwh8k/maxresdefault.jpg" text="Positional Chess"/>
-      <Playlistcard source="http://chessterra.com/wp-content/uploads/2019/07/tAEdKVLgURI-800x500.jpg" text="4 step ahead"/>
+      {route==="playlist" &&<Playlist value={arr}/>}
+      {route ==="home" && <Home/>}
+      {route ==="video" && <Videodisplay/>}
+      
       {SplashscreenDisplay && <Splashscreen animation ={splashScreen}/>}
-      </div>
     </div>
   );
 }

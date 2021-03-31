@@ -1,4 +1,5 @@
-import React,{useState} from 'react'
+import React,{useState,Fragment} from 'react'
+import {useRoute} from '../../Context'
 
 
 import Close from './Assets/images/Close.svg'
@@ -10,18 +11,46 @@ import playlist from './Assets/images/Playlist.svg'
 import search from './Assets/images/Search.svg'
 
 
-import './Nav.css'
+import './Assets/css/Nav.css'
+import './Assets/css/Responsive.css'
+
 export function Nav() {
-    const [hamburger,setHamburger] = useState(false)
+    const {setRoute} = useRoute()
     return (
-        <div className="nav">
-            <ul className="list">
-                <li className="list-item-inline"><button onClick={()=>setHamburger(!hamburger)} className="nav-btn"><img src={home}></img></button> <span className="btn-description">Home</span></li>
-                <li className="list-item-inline"><button onClick={()=>setHamburger(!hamburger)} className="nav-btn"><img src={search}></img></button><span className="btn-description">Search</span></li>
-                <li className="list-item-inline"><button onClick={()=>setHamburger(!hamburger)} className="nav-btn"><img src={like}></img></button> <span className="btn-description">Liked Videos</span></li>
-                <li className="list-item-inline"><button onClick={()=>setHamburger(!hamburger)} className="nav-btn extra"><img src={playlist}></img></button><span className="btn-description">Playlist</span></li>
-            </ul>
-        </div>
+        <Fragment>
+            <nav className="nav">
+                <ul className="list">
+                    <li className="list-item-inline">
+                        <button className="nav-btn" onClick={()=>setRoute("home")} ><img src={home}></img></button> <span className="btn-description">Home</span>
+                    </li>
+                    <li className="list-item-inline">
+                        <button className="nav-btn" onClick={()=>setRoute("search")} ><img src={search}></img></button><span className="btn-description">Search</span>
+                    </li>
+                    <li className="list-item-inline">
+                        <button className="nav-btn" onClick={()=>setRoute("liked")} ><img src={like}></img></button> <span className="btn-description">Liked Videos</span>
+                    </li>
+                    <li className="list-item-inline">
+                        <button className="nav-btn extra" onClick={()=>setRoute("playlist")} ><img src={playlist}></img></button><span className="btn-description">Playlist</span>
+                    </li>
+                </ul>
+            </nav>
+            <nav className="sidebar">
+            <ul className="list sidebar-list">
+                <li className="list-item-inline sidebar-list-item" onClick={()=>setRoute("home")}>
+                        <button className="nav-btn sidebar-btn" ><img src={home}></img></button> <span className="btn-description">Home</span>
+                    </li>
+                    <li className="list-item-inline sidebar-list-item" onClick={()=>setRoute("search")}>
+                        <button className="nav-btn sidebar-btn" ><img src={search}></img></button><span className="btn-description">Search</span>
+                    </li>
+                    <li className="list-item-inline sidebar-list-item" onClick={()=>setRoute("liked")}>
+                        <button className="nav-btn sidebar-btn" ><img src={like}></img></button> <span className="btn-description">Liked Videos</span>
+                    </li>
+                    <li className="list-item-inline sidebar-list-item" onClick={()=>setRoute("playlist")}>
+                        <button className="nav-btn sidebar-btn extra" ><img src={playlist}></img></button><span className="btn-description">Playlist</span>
+                    </li>
+                </ul>
+            </nav>
+        </Fragment>
     )
 }
 

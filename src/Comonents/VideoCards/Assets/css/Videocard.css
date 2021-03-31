@@ -1,0 +1,11 @@
+.video-card{
+    height:auto;
+    display:flex;
+    width:130vw;
+    height:100%;
+    margin-top: 0.5rem;
+}
+.video{
+    width:100%;
+    height:100% !important;
+}

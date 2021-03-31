@@ -1,5 +1,5 @@
 import React from 'react'
-import './Splashscreen.css'
+import './Assets/css/Splashscreen.css'
 import chess from './Assets/images/chessbackground.png'
 import chess1 from './Assets/images/chessbackground1.png'
 import splashscreen from './Assets/images/Splashscreen.svg'

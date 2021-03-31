@@ -1,0 +1,26 @@
+@media only screen and (min-width: 768px){
+    .list-playlist{
+        display: grid;
+        grid-template-columns: 1fr 1fr ;
+        padding:0
+    }
+    .video-home{
+        display:grid;
+        /* flex-direction:row;
+        flex-wrap: wrap;
+        justify-content:center; */
+        grid-template-columns: 1fr 1fr 1fr ;
+        padding:1rem;
+    }
+    .video-wrapper{
+        grid-area: main-body;
+    }
+}
+@media only screen and (max-width: 768px){
+    .list-playlist{
+        padding:0
+    }
+    .video-home{
+        padding:0
+    }
+}

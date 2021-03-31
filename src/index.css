@@ -12,8 +12,11 @@
 /* Roboto Thin WT 100 */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 
+@import "../node_modules/video-react/dist/video-react.css";
+
 :root{
   --background-color:#212121;
+  /* --heading-heading:# */
 }
 *:focus{
   outline-color: transparent;
@@ -27,28 +30,3 @@ body{
   background-color: var(--background-color);
   position: relative;
  }
- .heading{
-   color:white;
-   font-family: 'Roboto', sans-serif;
-   font-weight: bold;
-   font-size:1.5rem;
-   padding:1.5rem 0.7rem 1rem 0.7rem;
-   margin-top:0;
-   letter-spacing:0.2rem;
-   display:flex;
-   justify-content: center;
-   position: sticky;
-    top:0rem;
-    width:100%;
-    background-color: var(--nav-background);
-    z-index:var(--index-10);
-}
-.heading img{
-  margin-right: 0.3rem;
-}
-.main-body{
-  display: flex;
-  flex-direction:column;
-  align-items: center;
-  padding:1rem 1rem 5rem 1rem
-}

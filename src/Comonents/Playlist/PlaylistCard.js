@@ -1,5 +1,6 @@
 import React,{Fragment} from 'react'
-import './PlaylistCard.css'
+import './Assets/css/PlaylistCard.css'
+import './Assets/css/PlaylistResponsive.css'
 export function Playlistcard(props) {
     const {source,text} =props
     return (
