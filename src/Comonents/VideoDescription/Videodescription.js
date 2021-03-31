@@ -1,27 +1,35 @@
 import React,{Fragment} from 'react'
-import {useRoute} from '../../Context'
+import {useRoute,useVideo} from '../../Context'
 import './Assets/css/Videodescription.css'
 
 export function Videodescription(props) {
     const {setRoute} = useRoute()
-    const {url,description}=props
+    const {setVideo,video} = useVideo()
 
-    // https://img.youtube.com/vi/d6HSKQrLpns/hqdefault.jpg
-    // https://youtu.be/m5oeKOYKJPU
+    const {data} = props
+    const {id,title,videoUrl,channelName} = data
+
     // Crafting thumbnail
     let thumbnail_mq=""
     let thumbnail_hq=""
-    if(url!=undefined){ 
-    thumbnail_mq = url.replace('https://youtu.be/','https://img.youtube.com/vi/') + "/mqdefault.jpg"
-    thumbnail_hq = url.replace('https://youtu.be/','https://img.youtube.com/vi/') + "/hqdefault.jpg"
+    if(videoUrl!=undefined){ 
+     // @desc crafting medium(mq) and high(hq) quality thumbnails 
+    thumbnail_mq = "https://img.youtube.com/vi/"+id+"/mqdefault.jpg"
+    thumbnail_hq = "https://img.youtube.com/vi/"+id+"/hqdefault.jpg"
     }
+
+    function TitleOnClick(data){
+        setVideo(data)
+        setRoute("video")
+    }
+
     return (
         <Fragment>
         <div className="video-card">
             <img className="video-thumbnail" src={thumbnail_mq}></img>
             <div className="video-info">
-             <p className="video-text" onClick={()=>setRoute("video")}>KVizzing With The Comedians Third Edition || QF 2 feat. Kanan, Kaneez, Shantanu & Sulagna</p>
-             <small className="credits">By RB EDITS</small>
+             <p className="video-text" onClick={()=>TitleOnClick(data)}>{title}</p>
+             <small className="credits">{channelName}</small>
              <small className="date">2 Years Ago</small>
              </div>
              <i className="fa fa-ellipsis-v"></i>
@@ -29,8 +37,8 @@ export function Videodescription(props) {
         <div className="video-card-desktop">
             <img className="video-thumbnail" src={thumbnail_hq}></img>
             <div className="video-info">
-             <p className="video-text" onClick={()=>setRoute("video")}>KVizzing With The Comedians Third Edition || QF 2 feat. Kanan, Kaneez, Shantanu & Sulagna</p>
-             <small className="credits">By RB EDITS</small>
+             <p className="video-text" onClick={()=>TitleOnClick(data)}>{title}</p>
+             <small className="credits">{channelName}</small>
              <small className="date">2 Years Ago</small>
              </div>
              <i className="fa fa-ellipsis-v"></i>

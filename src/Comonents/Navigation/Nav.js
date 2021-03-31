@@ -24,7 +24,7 @@ export function Nav() {
                         <button className="nav-btn" onClick={()=>setRoute("home")} ><img src={home}></img></button> <span className="btn-description">Home</span>
                     </li>
                     <li className="list-item-inline">
-                        <button className="nav-btn" onClick={()=>setRoute("search")} ><img src={search}></img></button><span className="btn-description">Search</span>
+                        <button className="nav-btn" onClick={()=>setRoute("explore")} ><img src={search}></img></button><span className="btn-description">Explore</span>
                     </li>
                     <li className="list-item-inline">
                         <button className="nav-btn" onClick={()=>setRoute("liked")} ><img src={like}></img></button> <span className="btn-description">Liked Videos</span>
@@ -39,8 +39,8 @@ export function Nav() {
                 <li className="list-item-inline sidebar-list-item" onClick={()=>setRoute("home")}>
                         <button className="nav-btn sidebar-btn" ><img src={home}></img></button> <span className="btn-description">Home</span>
                     </li>
-                    <li className="list-item-inline sidebar-list-item" onClick={()=>setRoute("search")}>
-                        <button className="nav-btn sidebar-btn" ><img src={search}></img></button><span className="btn-description">Search</span>
+                    <li className="list-item-inline sidebar-list-item" onClick={()=>setRoute("explore")}>
+                        <button className="nav-btn sidebar-btn" ><img src={search}></img></button><span className="btn-description">Explore</span>
                     </li>
                     <li className="list-item-inline sidebar-list-item" onClick={()=>setRoute("liked")}>
                         <button className="nav-btn sidebar-btn" ><img src={like}></img></button> <span className="btn-description">Liked Videos</span>

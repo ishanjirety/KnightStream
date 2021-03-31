@@ -1,3 +1,3 @@
 export {Playlist} from './Playlist'
-export {Home} from './Home'
+export {Explore} from './Explore'
 export {Videodisplay} from './Videodisplay'

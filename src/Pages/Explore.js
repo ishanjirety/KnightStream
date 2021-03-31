@@ -1,13 +1,27 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
+import axios from 'axios'
+
+// @desc common image assets
 import home from '../Common-Assets/Home.svg'
 import search from '../Common-Assets/Search.svg'
+
+// @desc importing components
 import {Videocard,Videodescription} from '../Comonents'
+
+// @desc importing styles
 import './styles.css'
 import './Responsive-pages.css'
 
-export function Home() {
-    const arr =["https://youtu.be/Zp8a0IskmkE","https://youtu.be/RovI5tVPfvw","https://youtu.be/BTOHpoC-XsE","https://youtu.be/bs6Ov2mAfxU",]
-    // const arr =["https://youtu.be/Zp8a0IskmkE","https://youtu.be/RovI5tVPfvw"]
+export function Explore() {
+
+    const[videoList,setVideoList] = useState([])
+    
+    useEffect(async ()=>{
+       const response_videolist = await axios.get('http://127.0.0.1:4444/api/videolist')
+       const video_list = response_videolist.data.videos
+       console.log(video_list)
+       setVideoList(video_list)
+    },[])
     return (
             <div className="main-body">
             <div className="heading">
@@ -19,8 +33,8 @@ export function Home() {
             </div>
             <div className="card-wrapper">
                 <div className="video-home">
-                { arr.map((items=>{
-                    return <Videodescription url={items}/>
+                {videoList.map((data=>{
+                    return <Videodescription data={data}/>
                     }))
                 }
                 </div>

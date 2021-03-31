@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import './App.css';
 import {Nav,Splashscreen} from './Comonents'
-import {Playlist,Home,Videodisplay} from './Pages'
+import {Playlist,Explore,Videodisplay} from './Pages'
 
 // Context
 import {useRoute} from './Context'
@@ -27,7 +27,7 @@ function App() {
     <div className="App">
       <Nav/>
       {route==="playlist" &&<Playlist value={arr}/>}
-      {route ==="home" && <Home/>}
+      {route ==="explore" && <Explore/>}
       {route ==="video" && <Videodisplay/>}
       
       {SplashscreenDisplay && <Splashscreen animation ={splashScreen}/>}
