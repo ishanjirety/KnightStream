@@ -1,6 +1,5 @@
 import React from 'react'
 import './Assets/css/Videocard.css'
-import ReactPlayer from 'react-player'
 export function Videocard(props) {
     const {id} = props
     const url = `https://www.youtube.com/embed/${id}`

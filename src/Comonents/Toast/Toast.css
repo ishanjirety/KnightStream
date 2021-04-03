@@ -1,0 +1,40 @@
+:root{
+    --toast-background:#474747;
+}
+.toast{
+    position: absolute;
+    top:69%;
+    /* left:35%; */
+    animation:toast 1s ease-in-out;
+    color:white;
+    font-family: 'Merriweather Sans', sans-serif;
+    background-color:var(--toast-background);
+    font-weight: lighter;
+    z-index: var(--index-5);
+    padding:0 1rem 0 1rem;
+    border-radius: 3px;
+}
+.toast-fadeout{
+    animation:toast-fadeout 0.3s ease;
+    animation-fill-mode:forwards;
+}
+@keyframes toast{
+    from {
+        top:0%;
+        opacity: 0;
+    }
+    to{
+       top: 69%;
+       opacity: 1;
+    }
+}
+@keyframes toast-fadeout{
+    from {
+        opacity: 1;
+        top:69%
+    }
+    to{
+        opacity: 0;
+        top:0%;
+    }
+}

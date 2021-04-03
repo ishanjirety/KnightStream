@@ -2,15 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {Router,Video} from './Context'
+import {BrowserRouter as Router} from 'react-router-dom'
+import {Video,Playlist,Toast} from './Context'
 
 ReactDOM.render(
-  <React.StrictMode>
-  <Video>
-       <Router>
-          <App />
-        </Router>
-  </Video>
-  </React.StrictMode>,
+<React.StrictMode>
+<Toast>
+  <Playlist>    
+      <Video>
+          <Router>
+              <App />
+            </Router>
+      </Video>
+  </Playlist>    
+</Toast>
+</React.StrictMode>,
   document.getElementById('root')
 );

@@ -5,6 +5,8 @@ import axios from 'axios'
 import home from '../Common-Assets/Home.svg'
 import search from '../Common-Assets/Search.svg'
 
+import {useToast,useVideo} from '../Context'
+
 // @desc importing components
 import {Videocard,Videodescription} from '../Comonents'
 
@@ -12,28 +14,61 @@ import {Videocard,Videodescription} from '../Comonents'
 import './styles.css'
 import './Responsive-pages.css'
 
+let savedVideoListt = ""
 export function Explore() {
-
-    const[videoList,setVideoList] = useState([])
     
+    const {setToastContent,setToast} = useToast()
+
+    const {setVideo,video} = useVideo()
+
+    const [searchQuery,setSearchQuery] = useState()
+
     useEffect(async ()=>{
        const response_videolist = await axios.get('http://127.0.0.1:4444/api/videolist')
        const video_list = response_videolist.data.videos
-       console.log(video_list)
-       setVideoList(video_list)
+       savedVideoListt = video_list
+       setVideo(video_list)
     },[])
+
+    function onChangeHandler(e){
+        if(e!=""){    
+            setVideo((item)=>item.filter((video)=>video.title.toLowerCase().includes(e.toLowerCase())))
+        }
+        else{
+            setVideo(savedVideoListt)
+        }
+        }
+
     return (
             <div className="main-body">
-            <div className="heading">
-                KnightStream
+                <div className="heading search">
+                    <p>Explore</p>
+                    <div className="search-bar">
+                    <img src={search} className="search-icon"/>
+                    <input className="search-input" onChange={(e)=>onChangeHandler(e.target.value)} placeholder="Search"></input>
+                </div>
             </div>
-            <div className="search-bar">
-                <img src={search} className="search-icon"/>
-                <input className="search-input" placeholder="Search"></input>
+
+            <div class="genres-area">
+                <div className="genre-wrapper">
+                <div className="genres">
+                    <p>Fun & Learn</p>
+                </div>
+                <div className="genres">
+                    <p>Fun & Learn</p>
+                </div>
+                <div className="genres">
+                    <p>Fun & Learn</p>
+                </div>
+                <div className="genres">
+                    <p>Fun & Learn</p>
+                </div>
+                </div>
             </div>
+
             <div className="card-wrapper">
                 <div className="video-home">
-                {videoList.map((data=>{
+                {video.map((data=>{
                     return <Videodescription data={data}/>
                     }))
                 }

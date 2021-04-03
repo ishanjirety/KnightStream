@@ -93,3 +93,23 @@
 .fa:checked{
     color:rgb(226, 38, 77);
 }
+.genres-area{
+    display:flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    justify-content:center;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+.genre-wrapper{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    grid-row-gap: 10px;
+}
+.genres{
+    width:6rem;
+    margin: 0 0.5rem 0 0.5rem;
+    border-radius: 5px;
+    padding: 0 1rem 0 1rem;
+    color:white;
+    background-color: #474747
+}

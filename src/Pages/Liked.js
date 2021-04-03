@@ -1,28 +1,25 @@
 import React,{useEffect} from 'react'
 import axios from 'axios'
 
-import {usePlaylist,useToast} from '../Context'
-
-
 import {Playlistcard,Toast} from '../Comonents'
 
+import {useToast} from '../Context'
 
-import playlist from '../Common-Assets/Playlist.svg'
+import Like from '../Common-Assets/Like.svg'
+
 import './styles.css'
 import './Responsive-pages.css'
 
-export function Playlist(props) {
+export function Liked(props) {
     const {value} = props
 
     const {setToastContent,setToast,toast} = useToast()
 
-    const {PlaylistDispatcher,PlaylistState} = usePlaylist()
 
     useEffect(async ()=>{
         try{
-        const response_playlist = await axios.get('http://127.0.0.1:4444/api/playlist')
-        const playlist = response_playlist.data.playlists   
-        PlaylistDispatcher({type:"ADD-PLAYLIST",payload:playlist})
+        const response_liked = await axios.get('http://127.0.0.1:4444/api/liked')
+        const Liked = response_liked.data.likedvideos   
         }
         catch(e){
             setToast(true)
@@ -32,13 +29,13 @@ export function Playlist(props) {
     return (
         <div className="main-body">
             <div className="heading">
-                <img src={playlist}/>Playlists
+                <img src={Like}/>Liked Videos
             </div>
                 <div className="card-wrapper">
                     <ul className="list-playlist">
-                    {PlaylistState.playlist.map((item)=>{
+                    {/* {PlaylistState.playlist.map((item)=>{
                        return <li className="list-item-inline"><Playlistcard source="https://i.ytimg.com/vi/KGMEhdaZ6ZY/maxresdefault.jpg" text="Lectures"/></li>
-                    })}
+                    })} */}
                     </ul>
                 </div>
                 { toast && <Toast/>}

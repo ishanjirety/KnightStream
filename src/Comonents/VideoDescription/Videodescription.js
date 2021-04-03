@@ -1,9 +1,10 @@
 import React,{Fragment} from 'react'
-import {useRoute,useVideo} from '../../Context'
+import {Link} from 'react-router-dom'
+
+import {useVideo} from '../../Context'
 import './Assets/css/Videodescription.css'
 
 export function Videodescription(props) {
-    const {setRoute} = useRoute()
     const {setVideo,video} = useVideo()
 
     const {data} = props
@@ -18,30 +19,23 @@ export function Videodescription(props) {
     thumbnail_hq = "https://img.youtube.com/vi/"+id+"/hqdefault.jpg"
     }
 
-    function TitleOnClick(data){
-        setVideo(data)
-        setRoute("video")
-    }
-
     return (
         <Fragment>
         <div className="video-card">
             <img className="video-thumbnail" src={thumbnail_mq}></img>
             <div className="video-info">
-             <p className="video-text" onClick={()=>TitleOnClick(data)}>{title}</p>
+             <Link to={`/video/${data.id}`} className="video-text">{title}</Link>
              <small className="credits">{channelName}</small>
              <small className="date">2 Years Ago</small>
              </div>
-             <i className="fa fa-ellipsis-v"></i>
         </div>
         <div className="video-card-desktop">
             <img className="video-thumbnail" src={thumbnail_hq}></img>
             <div className="video-info">
-             <p className="video-text" onClick={()=>TitleOnClick(data)}>{title}</p>
+           <Link to={`/video/${data.id}`} className="video-text">{title}</Link>
              <small className="credits">{channelName}</small>
              <small className="date">2 Years Ago</small>
              </div>
-             <i className="fa fa-ellipsis-v"></i>
         </div>
     </Fragment>
     )
