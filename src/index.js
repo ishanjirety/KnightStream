@@ -3,19 +3,23 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import {BrowserRouter as Router} from 'react-router-dom'
-import {Video,Playlist,Toast} from './Context'
+import {Video,Playlist,Toast,Liked,Saved} from './Context'
 
 ReactDOM.render(
 <React.StrictMode>
-<Toast>
-  <Playlist>    
-      <Video>
-          <Router>
-              <App />
-            </Router>
-      </Video>
-  </Playlist>    
-</Toast>
+<Saved>
+  <Liked>
+    <Toast>
+      <Playlist>    
+          <Video>
+              <Router>
+                  <App />
+              </Router>
+          </Video>
+      </Playlist>    
+    </Toast>
+  </Liked>
+</Saved>
 </React.StrictMode>,
   document.getElementById('root')
 );

@@ -6,14 +6,17 @@
     }
     .video-home{
         display:grid;
-        /* flex-direction:row;
-        flex-wrap: wrap;
-        justify-content:center; */
         grid-template-columns: 1fr 1fr 1fr ;
         padding:1rem;
     }
     .video-wrapper{
         grid-area: main-body;
+    }
+    .display-items{
+        overflow-y: hidden;
+    }
+    .nav-options-link{
+        right:3rem
     }
 }
 @media only screen and (max-width: 768px){
@@ -22,5 +25,11 @@
     }
     .video-home{
         padding:0
+    }
+    .video-wrapper{
+        flex-wrap: wrap;
+    }
+    textarea{
+        height:9.5rem;
     }
 }

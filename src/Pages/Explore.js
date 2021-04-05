@@ -4,6 +4,7 @@ import axios from 'axios'
 // @desc common image assets
 import home from '../Common-Assets/Home.svg'
 import search from '../Common-Assets/Search.svg'
+import search_white from '../Common-Assets/Search-white.svg'
 
 import {useToast,useVideo} from '../Context'
 
@@ -42,7 +43,7 @@ export function Explore() {
     return (
             <div className="main-body">
                 <div className="heading search">
-                    <p>Explore</p>
+                <p > <img src={search_white}/> Explore</p>
                     <div className="search-bar">
                     <img src={search} className="search-icon"/>
                     <input className="search-input" onChange={(e)=>onChangeHandler(e.target.value)} placeholder="Search"></input>

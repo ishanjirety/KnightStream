@@ -1,9 +1,9 @@
 import React,{useEffect} from 'react'
 import axios from 'axios'
 
-import {Playlistcard,Toast} from '../Comonents'
+import {Playlistcard,Toast,Videodescription} from '../Comonents'
 
-import {useToast} from '../Context'
+import {useToast,useLike} from '../Context'
 
 import Like from '../Common-Assets/Like.svg'
 
@@ -15,11 +15,13 @@ export function Liked(props) {
 
     const {setToastContent,setToast,toast} = useToast()
 
+    const {likedState,likedDispatch} = useLike()
 
     useEffect(async ()=>{
         try{
         const response_liked = await axios.get('http://127.0.0.1:4444/api/liked')
-        const Liked = response_liked.data.likedvideos   
+        const Liked = response_liked.data.liked   
+        likedDispatch({type:"REFRESH-LIKED",payload:Liked})
         }
         catch(e){
             setToast(true)
@@ -32,11 +34,11 @@ export function Liked(props) {
                 <img src={Like}/>Liked Videos
             </div>
                 <div className="card-wrapper">
-                    <ul className="list-playlist">
-                    {/* {PlaylistState.playlist.map((item)=>{
-                       return <li className="list-item-inline"><Playlistcard source="https://i.ytimg.com/vi/KGMEhdaZ6ZY/maxresdefault.jpg" text="Lectures"/></li>
-                    })} */}
-                    </ul>
+                    <div className="video-home">
+                    {likedState.likedvideos.map((item)=>{
+                    return <Videodescription data={item}/>
+                    })}
+                    </div>
                 </div>
                 { toast && <Toast/>}
             </div>

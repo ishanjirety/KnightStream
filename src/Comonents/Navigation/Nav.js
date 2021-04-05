@@ -22,7 +22,7 @@ export function Nav() {
             <nav className="nav">
                 <ul className="list">
                 <li className="list-item-inline">
-                    <NavLink to="/home" className="nav-btn">
+                    <NavLink to="/" className="nav-btn">
                         <img src={home}></img>
                    </NavLink> <span className="btn-description">Home</span>
                    </li>

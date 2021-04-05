@@ -1,0 +1,8 @@
+.playlist-action{
+    background-color:green;
+    width:10rem;
+    position: absolute;
+    height:10rem;
+    /* right:0; */
+    /* top: -10rem; */
+}
