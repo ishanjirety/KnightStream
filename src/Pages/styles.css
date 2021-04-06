@@ -3,6 +3,7 @@
     --search-text-color:#111827;
 
     --search-rgb:rgba(243, 244, 246,0.3);
+    --hover-rgb:rgba(33,33,33,0.3);
     --sub-text-color:#c2c2c2;
     --border-color:#5c5c5c
 }
@@ -80,6 +81,7 @@ textarea{
     font-family: 'Merriweather Sans', sans-serif;
     color:white !important;
     margin-top:1rem;
+    white-space:pre-wrap;
 }
 .note-controlls{
     display:flex;
@@ -108,15 +110,82 @@ textarea{
     background-color:transparent;
     color:white;
     margin:0.5rem;
-    border:none;
+    border:transparent;
     padding:0.5rem;
     transition: 0.3s;
     letter-spacing:2px;
     align-self: flex-end;
     position: absolute;
     right: 1rem;
+    border-radius:50%;
+}
+.fa-trash-o{
+    color: #FF3333 !important;
+}
+.trash:hover{
+    background-color:var(--hover-rgb)
+}
+.trash:hover .fa-trash-o{
+    transform:rotate(-20deg)
 }
 
+.warning-modal{
+    position:absolute;
+    background-color:#212121;
+    right:2rem;
+    height:auto;
+    top:-5.5rem;
+    box-shadow:var(--box-shadow) 0px 0px 3px;
+    width:60%;
+    z-index:var(--index-10);
+    padding:0 0 0.3rem 0;
+}
+.warning{
+    width:100%;
+    color:white;
+    display:flex;
+    justify-content:flex-start;
+    flex-direction:column;
+}
+.warning span{
+    margin:0 0 0 0.5rem;
+    height:1.9rem;
+    border-bottom: 1.5px solid white;
+    width:96%;
+}
+.warning-heading{
+    margin:0;
+    text-align:left;
+    padding:0.5rem 0 0 0;
+    font-size:0.8rem;
+    display:flex;
+    align-items:center;
+}
+.warning-heading span{
+    border-bottom:1rem solid #fff;
+}
+.warning-btn{
+    border:1px solid #858585;
+    margin: 0 1rem 0 0 ;
+    padding:0.2rem;
+    width:30%;
+    color:white;
+    background:transparent;
+}
+.warning-primary{
+    background:#3D3D3D;
+    border:none;
+}
+.fa-warning{
+    margin:0 0 0 0.3rem;
+    color:yellow !important;
+    font-size:0.8rem !important;
+}
+.warning-text{
+    font-size:0.7rem;
+    text-align:left;
+    padding: 0 0.5rem;
+}
 .save-btn:hover{
     background-color:#212121
 }
@@ -245,12 +314,11 @@ textarea{
     position: absolute;
     z-index: var(--index-5);
     right: 1rem;   
-    top:70%;
+    bottom:-130%;
 }
 .saved-image{
     width:7rem;
     animation: zoomin 0.2s forwards linear, swipe 0.1s 1s forwards linear;
-    /* animation-fill-mode: forwards; */
 }
 @keyframes zoomin{
     from{

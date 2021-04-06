@@ -49,29 +49,11 @@ export function Explore() {
                     <input className="search-input" onChange={(e)=>onChangeHandler(e.target.value)} placeholder="Search"></input>
                 </div>
             </div>
-
-            <div class="genres-area">
-                <div className="genre-wrapper">
-                <div className="genres">
-                    <p>Fun & Learn</p>
-                </div>
-                <div className="genres">
-                    <p>Fun & Learn</p>
-                </div>
-                <div className="genres">
-                    <p>Fun & Learn</p>
-                </div>
-                <div className="genres">
-                    <p>Fun & Learn</p>
-                </div>
-                </div>
-            </div>
-
             <div className="card-wrapper">
                 <div className="video-home">
-                {video.map((data=>{
-                    return <Videodescription data={data}/>
-                    }))
+                {video.map((data,key)=>{
+                    return <Videodescription data={data} keyValue={key}/>
+                    })
                 }
                 </div>
             </div>

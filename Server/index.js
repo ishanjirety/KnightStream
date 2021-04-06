@@ -40,7 +40,9 @@ app.get("/api/liked",(req,res)=>{
 })
 
 app.post("/api/liked/add",(req,res)=>{
+    if(liked.likedvideos.find((videos)=>videos.id === req.body.id)===undefined){
     liked={...liked,count:liked.count+1,likedvideos:[...liked.likedvideos,{...req.body,isLiked:true}]}
+    }
     res.json({
         status:200,
         comment:`Video ID: ${req.body.id} liked`
@@ -64,7 +66,15 @@ app.get("/api/saved",(req,res)=>{
     })
 }) 
 app.post("/api/save/add",(req,res)=>{
+    if(saved.savedvideos.filter((video)=>video.id===req.body.id).length === 0){
     saved={...saved,count:saved.count+1,savedvideos:[...saved.savedvideos,{...req.body,isSaved:true}]}
+    }
+    
+    else{
+            saved={...saved,savedvideos:saved.savedvideos.map((video)=>video.id === req.body.id ? req.body : video)}
+        }
+        console.log(saved.savedvideos.length)
+    // console.log(saved)
     res.json({
         status:200,
         comment:`Video ID: ${req.body.id} saved`

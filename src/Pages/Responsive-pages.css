@@ -32,4 +32,12 @@
     textarea{
         height:9.5rem;
     }
+    .note-controlls{
+        height:3.5rem;
+    }
+    .saved-display{
+        right:1rem;
+        /* top:300%; */
+        top:1rem;  
+    }
 }

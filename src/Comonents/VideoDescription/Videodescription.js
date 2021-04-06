@@ -7,7 +7,7 @@ import './Assets/css/Videodescription.css'
 export function Videodescription(props) {
     const {setVideo,video} = useVideo()
 
-    const {data} = props
+    const {data,keyValue} = props
     const {id,title,videoUrl,channelName} = data
 
     // Crafting thumbnail
@@ -21,7 +21,7 @@ export function Videodescription(props) {
 
     return (
         <Fragment>
-        <div className="video-card">
+        <div className="video-card" key={data.id}>
             <img className="video-thumbnail" src={thumbnail_mq}></img>
             <div className="video-info">
              <Link to={`/video/${data.id}`} className="video-text">{title}</Link>
@@ -29,7 +29,7 @@ export function Videodescription(props) {
              <small className="date">2 Years Ago</small>
              </div>
         </div>
-        <div className="video-card-desktop">
+        <div className="video-card-desktop" key={data.id}>
             <img className="video-thumbnail" src={thumbnail_hq}></img>
             <div className="video-info">
            <Link to={`/video/${data.id}`} className="video-text">{title}</Link>

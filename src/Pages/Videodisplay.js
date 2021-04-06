@@ -22,18 +22,24 @@ export function Videodisplay() {
     const [liked,setLiked] = useState("")
     const [saved,setSaved] = useState("")
     const [saveToggle,setSaveToggle] = useState("")
+    const [notes,setNotes] = useState("")
+    const [OpenModal,setOpenModal] = useState(false)
 
     useEffect(async ()=>{
         const response_videolist = await axios.get('http://127.0.0.1:4444/api/videolist')
         const video_list = await response_videolist.data.videos
-        console.log(video_list)
         const video = await video_list.find((item)=>item.id===videoId)
+        console.log(video)
         setFoundVideo(video)
-        console.log(video.isLiked)
-
         video.isLiked ? setLiked("LIKED") : setLiked("UNLIKED")
 
-        video.isSaved ? setSaveToggle(true) : setSaveToggle(false)
+        const response_saved = await axios.get("http://127.0.0.1:4444/api/saved")
+        const parsed_video = await response_saved.data.saved.savedvideos
+
+        if(parsed_video !== undefined && parsed_video.length !== 0){
+        const saved_video = await parsed_video.find((item)=>item.id===videoId)
+        saved_video !== undefined ? setNotes(saved_video.notes) :setNotes("")
+        }
     },[])
     
     useEffect(async ()=>{
@@ -53,25 +59,35 @@ export function Videodisplay() {
     }
     },[liked])
     
-    useEffect(async ()=>{
+   async function SaveHandler(action){
         try{
-        if(saved === "SAVED"){
-            const response_saved = await axios.post('http://127.0.0.1:4444/api/save/add',FoundVideo)
-            savedDispatch({type:"ADD-TO-SAVED",payload:FoundVideo})
-            setSaveToggle(true)
-        }
-        else{
-            const response_removed_saved = await axios.post('http://127.0.0.1:4444/api/save/remove',FoundVideo)
-            savedDispatch({type:"REMOVE-FROM-SAVED",payload:FoundVideo})
-            setSaveToggle(false)
-        }
-        }
+            switch(action){
+                case "SAVE" :
+                    setSaveToggle(true)
+                    const TEXT = notes.replace(/\n/g,"[nl]")
+                    console.log(TEXT)
+                    const response_saved = await axios.post('http://127.0.0.1:4444/api/save/add',{...FoundVideo,notes:notes})
+                    console.log("SAVED : ",response_saved)
+                    savedDispatch({type:"ADD-TO-SAVED",payload:{...FoundVideo,notes:notes}})
+                    setTimeout(()=>setSaveToggle(false),2000)
+                    break
+                case "DELETE" :
+                console.log(FoundVideo)
+                const response_removed_saved = await axios.post('http://127.0.0.1:4444/api/save/remove',FoundVideo)
+                savedDispatch({type:"REMOVE-FROM-SAVED",payload:FoundVideo})
+                setSaveToggle(false)
+                setOpenModal(false)
+                setNotes("")
+                break;
+            }
+            
+            }
         catch(e){
             console.error("ERROR : COULD NOT SAVE", e)
         }
-    },[saved])
-
+    }
     return (
+        <Fragment>
         <div className="video-wrapper">
             <div className="video-holder">
              <Videocard id={videoId}/>
@@ -80,15 +96,9 @@ export function Videodisplay() {
                 <p className="video-title">{FoundVideo.title}</p>
                 <div className="video-action-buttons">
                     <input type="checkbox" className="btn-video-action fa fa-heart" onChange={()=>liked==="UNLIKED" || liked==="" ? setLiked("LIKED") : setLiked("UNLIKED")} checked={liked === "LIKED" ? true : false}></input>
-                    <button className="btn-video-action svg-btn"><img  className="action-icon" src={playlist}></img></button>
-                    <input type="checkbox" className="btn-video-action fa fa-bookmark" onChange={()=>saved==="SAVED" || saved === "" ? setSaved("UNSAVED") : setSaved("SAVED")} checked={saveToggle}></input>
-                    
+                    <button className="btn-video-action svg-btn"><img  className="action-icon" src={playlist}></img></button>                  
                     
                     {/* <PlaylistAction/> */}
-                </div>
-                
-                <div className="saved-display">
-                    { saveToggle && <img src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`} className="saved-image"></img>}
                 </div>
             </div>
            }
@@ -96,15 +106,31 @@ export function Videodisplay() {
            <div className="take-notes">
                 <div className="saved-heading">
                     <span><p>ADD NOTES</p></span>
-                    
                 </div>
-                <textarea></textarea>
-                <div className="note-controlls">
-                <button className="trash"><i className="fa fa-trash-o"></i></button>
-                <button className="save-btn">SAVE<i className="fa fa-bookmark-o"></i></button>
-                </div>
-           </div>
-        </div>
-    )
-}
+                <textarea onChange={(e)=>setNotes(e.target.value)} value={notes}></textarea>
+                <div className="note-controlls" >
 
+                <button className="trash" onClick={()=>setOpenModal(true)}><i className="fa fa-trash-o"></i></button>
+                <button className="save-btn" onClick={()=>SaveHandler("SAVE")}>SAVE<i className="fa fa-bookmark-o"></i></button>     
+
+                { OpenModal && <div className="warning-modal">
+                        <div className="warning">
+                        <span><p className="warning-heading">Delete Notes</p></span>
+                        <p className="warning-text">This can’t be undone and it will be removed from your notes.</p>
+                        <div className="warning-controls">
+                            <button className="warning-btn warning-primary"  onClick={()=>SaveHandler("DELETE")}>Delete</button>
+                            <button className="warning-btn" onClick={()=>setOpenModal(false)}>Cancel</button>
+                        </div>
+                    </div> 
+                </div>}
+                </div>
+
+           </div>
+           
+        </div>
+        <div className="saved-display">
+                 { saveToggle && <img src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`} className="saved-image"></img>}
+                </div>
+        </Fragment>
+    )
+} 
