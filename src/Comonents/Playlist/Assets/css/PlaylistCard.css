@@ -35,6 +35,9 @@
     text-align:left;
     font-weight:bold;
     align-self: center;
+    color: white;
+    text-decoration: none;
+    display:block;
 }
 .date{
     font-family: 'Roboto', sans-serif;

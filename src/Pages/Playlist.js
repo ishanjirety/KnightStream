@@ -22,7 +22,8 @@ export function Playlist(props) {
         try{
         const response_playlist = await axios.get('http://127.0.0.1:4444/api/playlist')
         const playlist = response_playlist.data.playlists   
-        PlaylistDispatcher({type:"ADD-PLAYLIST",payload:playlist})
+        console.log(playlist)
+        PlaylistDispatcher({type:"REFRESH-PLAYLIST",payload:playlist})
         }
         catch(e){
             setToast(true)
@@ -37,7 +38,8 @@ export function Playlist(props) {
                 <div className="card-wrapper">
                     <ul className="list-playlist">
                     {PlaylistState.playlist.map((item)=>{
-                       return <li className="list-item-inline"><Playlistcard source="https://i.ytimg.com/vi/KGMEhdaZ6ZY/maxresdefault.jpg" text="Lectures"/></li>
+                        return <li className="list-item-inline"><Playlistcard source="https://i.ytimg.com/vi/KGMEhdaZ6ZY/maxresdefault.jpg" text={item.name} data={item}/></li>
+                       
                     })}
                     </ul>
                 </div>

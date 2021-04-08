@@ -6,7 +6,7 @@ import axios from 'axios'
 import {Videocard,PlaylistAction} from '../Comonents'
 
 // importing hooks 
-import {useVideo,useLike,useSaved} from '../Context'
+import {useVideo,useLike,useSaved,usePlaylist} from '../Context'
 
 // @desc common assets
 import playlist from '../Common-Assets/Playlist.svg'
@@ -15,24 +15,27 @@ import playlist from '../Common-Assets/Playlist.svg'
 export function Videodisplay() {
     const {likedDispatch,likedState} = useLike()
     const {savedState,savedDispatch} = useSaved()
+    const{PlaylistState,PlaylistDispatcher}=usePlaylist()
 
     const {videoId} = useParams()
 
     const [FoundVideo,setFoundVideo] = useState()
     const [liked,setLiked] = useState("")
-    const [saved,setSaved] = useState("")
     const [saveToggle,setSaveToggle] = useState("")
     const [notes,setNotes] = useState("")
     const [OpenModal,setOpenModal] = useState(false)
+    const [showPlaylist,setShowPlaylist] = useState(false)
 
     useEffect(async ()=>{
+
+        // Finding Video From URL Param
         const response_videolist = await axios.get('http://127.0.0.1:4444/api/videolist')
         const video_list = await response_videolist.data.videos
         const video = await video_list.find((item)=>item.id===videoId)
-        console.log(video)
         setFoundVideo(video)
         video.isLiked ? setLiked("LIKED") : setLiked("UNLIKED")
 
+        // Getting Saved List
         const response_saved = await axios.get("http://127.0.0.1:4444/api/saved")
         const parsed_video = await response_saved.data.saved.savedvideos
 
@@ -40,6 +43,12 @@ export function Videodisplay() {
         const saved_video = await parsed_video.find((item)=>item.id===videoId)
         saved_video !== undefined ? setNotes(saved_video.notes) :setNotes("")
         }
+
+        // Fetching Playlists
+        const response_playlist = await axios.get("http://127.0.0.1:4444/api/playlist")
+        const playlist = response_playlist.data.playlists
+        PlaylistDispatcher({type:"REFRESH-PLAYLIST",payload:playlist})
+
     },[])
     
     useEffect(async ()=>{
@@ -88,7 +97,7 @@ export function Videodisplay() {
     }
     return (
         <Fragment>
-        <div className="video-wrapper">
+        <div className="video-wrapper" >
             <div className="video-holder">
              <Videocard id={videoId}/>
              {FoundVideo!=undefined && 
@@ -96,7 +105,7 @@ export function Videodisplay() {
                 <p className="video-title">{FoundVideo.title}</p>
                 <div className="video-action-buttons">
                     <input type="checkbox" className="btn-video-action fa fa-heart" onChange={()=>liked==="UNLIKED" || liked==="" ? setLiked("LIKED") : setLiked("UNLIKED")} checked={liked === "LIKED" ? true : false}></input>
-                    <button className="btn-video-action svg-btn"><img  className="action-icon" src={playlist}></img></button>                  
+                    <button className="btn-video-action svg-btn" onClick={()=>setShowPlaylist(!showPlaylist)}><img  className="action-icon" src={playlist}></img></button>                  
                     
                     {/* <PlaylistAction/> */}
                 </div>
@@ -124,13 +133,13 @@ export function Videodisplay() {
                     </div> 
                 </div>}
                 </div>
-
            </div>
            
         </div>
         <div className="saved-display">
                  { saveToggle && <img src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`} className="saved-image"></img>}
-                </div>
+        </div>
+            <PlaylistAction styles={showPlaylist ? {height:'15rem'} : {height:"0"}} data={FoundVideo}/>
         </Fragment>
     )
 } 

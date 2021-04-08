@@ -8,7 +8,7 @@ export function Videodescription(props) {
     const {setVideo,video} = useVideo()
 
     const {data,keyValue} = props
-    const {id,title,videoUrl,channelName} = data
+    const {id,title,name,videoUrl,channelName,videos} = data
 
     // Crafting thumbnail
     let thumbnail_mq=""
@@ -24,7 +24,7 @@ export function Videodescription(props) {
         <div className="video-card" key={data.id}>
             <img className="video-thumbnail" src={thumbnail_mq}></img>
             <div className="video-info">
-             <Link to={`/video/${data.id}`} className="video-text">{title}</Link>
+             <Link to={`/video/${data.id}`} className="video-text">{title===undefined ? name : title}</Link>
              <small className="credits">{channelName}</small>
              <small className="date">2 Years Ago</small>
              </div>
@@ -32,7 +32,7 @@ export function Videodescription(props) {
         <div className="video-card-desktop" key={data.id}>
             <img className="video-thumbnail" src={thumbnail_hq}></img>
             <div className="video-info">
-           <Link to={`/video/${data.id}`} className="video-text">{title}</Link>
+           <Link to={`/video/${data.id}`} className="video-text">{title===undefined ? name : title}</Link>
              <small className="credits">{channelName}</small>
              <small className="date">2 Years Ago</small>
              </div>

@@ -18,6 +18,12 @@ export function usePlaylist(){
 
 let playlists={
     count:0,
-    playlist:[],
+    playlist:[
+        {
+            name: "DEMO",
+            count: 0,
+            videos : [],
+        }
+    ],
 }
 

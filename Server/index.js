@@ -30,6 +30,39 @@ app.get("/api/playlist",(req,res)=>{
         playlists:playlists
     })
 })
+app.post("/api/playlist/add",(req,res)=>{
+    playlists = {...playlists,count:playlists.count+1,playlist:[...playlists.playlist,req.body]}
+    res.json({
+        status:200,
+        comment:`${req.body.name} added to playlists`
+    })
+})
+
+app.get("/api/playlist/remove",(req,res)=>{
+   
+})
+app.post("/api/playlist/item/add",(req,res)=>{
+    const request_body = req.body
+    playlists = {...playlists,playlist:playlists.playlist.map((playlist)=>playlist.name === request_body.name ? {...playlist,count:playlist.count+1,videos:[...playlist.videos,request_body.video]} : playlist)}
+    res.json({
+        status:200,
+        comment : `${request_body.video.name} added to ${request_body.name}`,
+        data: playlists
+    })
+})
+app.post("/api/playlist/item/remove",(req,res)=>{
+    const request_body = req.body
+    console.log(request_body)
+    playlists = {...playlists,playlist:playlists.playlist.map(playlist=>playlist.name === request_body.name ? {...playlist,count: playlist.count > 0 ? playlist.count-1 : 0, videos:playlist.videos.filter(video => video.id !== request_body.video.id)}:playlist)}
+    console.log(playlists)
+    res.json({
+        status:302,
+        comment:`${request_body.video.id} removed from '${request_body.name}`,
+        data:playlists
+    })
+})
+
+
 
 // @route liked operations
 app.get("/api/liked",(req,res)=>{

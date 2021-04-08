@@ -36,6 +36,7 @@
     height:100%;
     position: relative;
     display:flex;
+    transition: 0.6s;
 }
 .video-holder{
     width:100%;
@@ -296,7 +297,7 @@ textarea{
 .display-items{
     display: flex;
     flex-direction:row;
-    overflow: scroll;
+    overflow: hidden;
     width: 100%;
 }
 .home{

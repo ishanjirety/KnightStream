@@ -1,8 +1,66 @@
+
+.save-to-playlist *{
+    font-family: 'Merriweather Sans', sans-serif;
+}
+.save-to-playlist{
+    width:92%;
+    height:16rem;
+    display:flex;
+    flex-direction:column;
+    justify-content: flex-start;
+    align-items: flex-start; 
+    position: fixed;
+    padding:0.2rem 1rem 0 1rem;
+    bottom:3rem;
+    left:0;
+    background-color: var(--nav-background);    
+    box-shadow: var(--box-shadow) -3px -1px 4px;
+    font-family: 'Merriweather Sans', sans-serif;
+    color:var(--text-color);
+    transition:0.5s
+}
+.playlist-heading{
+    width:100%;
+    height:3rem;
+    border-bottom: 2px solid var(--search-rgb);
+}
+.playlist-heading p{
+    letter-spacing: 2px;
+    font-size: 1.2rem;
+    text-align: left;
+}
 .playlist-action{
-    background-color:green;
-    width:10rem;
+    width:95%;
+    transform:translateY(9rem);
+    display:flex;
     position: absolute;
-    height:10rem;
-    /* right:0; */
-    /* top: -10rem; */
+    top:2.2rem;
+    background-color:var(--nav-background);
+    height:2rem;
+    padding:1rem 0 1rem 0;
+}
+
+.add-playlist{
+    background-color:transparent;
+    border:none;
+    border-bottom:1px solid var(--search-rgb);
+    width:70%;
+    color:white;
+}
+.playlist-add-action{
+    background-color:transparent;
+    color:var(--text-color);
+    border:1px solid var(--search-rgb);
+    margin-left:1rem;
+    padding:0.2rem 1rem 0.2rem 1rem;
+    width:20%;
+}
+.playlist-items{
+    display:flex;
+    flex-direction:column;
+    overflow:scroll;
+    margin:0.5rem 0 0 0;
+    height:50%;
+    width:100%;
+    align-items: flex-start;
 }

@@ -18,6 +18,20 @@
     .nav-options-link{
         right:3rem
     }
+    .liked{
+        overflow-x: hidden;
+        display:grid;
+        grid-template-columns: 1fr 1fr 1fr
+    }
+    .liked .video-card-desktop{
+        display:inline-block;
+        width:18rem !important
+    }
+    .liked .video-info{
+        width:90%;
+        margin-left:0.5rem;
+    }
+
 }
 @media only screen and (max-width: 768px){
     .list-playlist{
@@ -39,5 +53,13 @@
         right:1rem;
         /* top:300%; */
         top:1rem;  
+    }
+    
+    .liked{
+        flex-wrap: wrap;
+    }
+    .display-items{
+        display: flex;
+        flex-wrap: wrap;
     }
 }
