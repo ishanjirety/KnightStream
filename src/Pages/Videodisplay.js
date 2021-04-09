@@ -6,16 +6,16 @@ import axios from 'axios'
 import {Videocard,PlaylistAction} from '../Comonents'
 
 // importing hooks 
-import {useVideo,useLike,useSaved,usePlaylist} from '../Context'
+import {useLike,useSaved,usePlaylist} from '../Context'
 
 // @desc common assets
 import playlist from '../Common-Assets/Playlist.svg'
 
 
 export function Videodisplay() {
-    const {likedDispatch,likedState} = useLike()
-    const {savedState,savedDispatch} = useSaved()
-    const{PlaylistState,PlaylistDispatcher}=usePlaylist()
+    const {likedDispatch} = useLike()
+    const {savedDispatch} = useSaved()
+    const{PlaylistDispatcher}=usePlaylist()
 
     const {videoId} = useParams()
 
@@ -26,8 +26,8 @@ export function Videodisplay() {
     const [OpenModal,setOpenModal] = useState(false)
     const [showPlaylist,setShowPlaylist] = useState(false)
 
-    useEffect(async ()=>{
-
+    useEffect(()=>{
+        (async function fetchData(){
         // Finding Video From URL Param
         const response_videolist = await axios.get('http://127.0.0.1:4444/api/videolist')
         const video_list = await response_videolist.data.videos
@@ -48,24 +48,26 @@ export function Videodisplay() {
         const response_playlist = await axios.get("http://127.0.0.1:4444/api/playlist")
         const playlist = response_playlist.data.playlists
         PlaylistDispatcher({type:"REFRESH-PLAYLIST",payload:playlist})
-
+    })()
     },[])
     
-    useEffect(async ()=>{
+    useEffect(()=>{
+    (async function fetchData(){
         try{
         if(liked==="LIKED"){
-            const response_liked = await axios.post('http://127.0.0.1:4444/api/liked/add',FoundVideo)
+            await axios.post('http://127.0.0.1:4444/api/liked/add',FoundVideo)
             likedDispatch({type:"ADD-TO-LIKED",payload:FoundVideo})
             setLiked("LIKED") 
         }
         if(liked==="UNLIKED"){
-            const response_removed_like = await axios.post('http://127.0.0.1:4444/api/liked/remove',FoundVideo)
+            await axios.post('http://127.0.0.1:4444/api/liked/remove',FoundVideo)
             likedDispatch({type:"REMOVE-FROM-LIKED",payload:FoundVideo})
             setLiked("UNLIKED")
         }
     }catch(e){
         console.error("ERROR : COULD NOT LIKE ",e)
     }
+})()
     },[liked])
     
    async function SaveHandler(action){
@@ -82,12 +84,14 @@ export function Videodisplay() {
                     break
                 case "DELETE" :
                 console.log(FoundVideo)
-                const response_removed_saved = await axios.post('http://127.0.0.1:4444/api/save/remove',FoundVideo)
+                await axios.post('http://127.0.0.1:4444/api/save/remove',FoundVideo)
                 savedDispatch({type:"REMOVE-FROM-SAVED",payload:FoundVideo})
                 setSaveToggle(false)
                 setOpenModal(false)
                 setNotes("")
                 break;
+                default:
+                    return
             }
             
             }
@@ -100,12 +104,12 @@ export function Videodisplay() {
         <div className="video-wrapper" >
             <div className="video-holder">
              <Videocard id={videoId}/>
-             {FoundVideo!=undefined && 
+             {FoundVideo!==undefined && 
             <div className="description">
                 <p className="video-title">{FoundVideo.title}</p>
                 <div className="video-action-buttons">
                     <input type="checkbox" className="btn-video-action fa fa-heart" onChange={()=>liked==="UNLIKED" || liked==="" ? setLiked("LIKED") : setLiked("UNLIKED")} checked={liked === "LIKED" ? true : false}></input>
-                    <button className="btn-video-action svg-btn" onClick={()=>setShowPlaylist(!showPlaylist)}><img  className="action-icon" src={playlist}></img></button>                  
+                    <button className="btn-video-action svg-btn" onClick={()=>setShowPlaylist(!showPlaylist)}><img alt="playlist" className="action-icon" src={playlist}></img></button>                  
                     
                     {/* <PlaylistAction/> */}
                 </div>
@@ -137,9 +141,9 @@ export function Videodisplay() {
            
         </div>
         <div className="saved-display">
-                 { saveToggle && <img src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`} className="saved-image"></img>}
+                 { saveToggle && <img src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`} alt="saved" className="saved-image"></img>}
         </div>
-            <PlaylistAction styles={showPlaylist ? {height:'15rem'} : {height:"0"}} data={FoundVideo}/>
+            <PlaylistAction styles={showPlaylist ? {height:'15rem'} : {height:"0"}} data={FoundVideo} display={showPlaylist ? {display:"flex"} : {display:"none"}} state={setShowPlaylist}/>
         </Fragment>
     )
 } 

@@ -38,7 +38,15 @@ app.post("/api/playlist/add",(req,res)=>{
     })
 })
 
-app.get("/api/playlist/remove",(req,res)=>{
+app.post("/api/playlist/remove",(req,res)=>{
+    const request_body = req.body
+    console.log(request_body)
+    playlists = {...playlists,count:playlists.count > 0 ? playlists.count - 1 : 0, playlist:playlists.playlist.filter(playlist => playlist.name !== request_body.name) }
+    res.json({
+        status:302,
+        comment:`${request_body.name} deleted from playlist`,
+        data:playlists
+    })
    
 })
 app.post("/api/playlist/item/add",(req,res)=>{

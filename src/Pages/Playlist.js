@@ -12,13 +12,12 @@ import './styles.css'
 import './Responsive-pages.css'
 
 export function Playlist(props) {
-    const {value} = props
-
     const {setToastContent,setToast,toast} = useToast()
 
     const {PlaylistDispatcher,PlaylistState} = usePlaylist()
 
-    useEffect(async ()=>{
+    useEffect(()=>{
+        (async function fetchData(){
         try{
         const response_playlist = await axios.get('http://127.0.0.1:4444/api/playlist')
         const playlist = response_playlist.data.playlists   
@@ -29,18 +28,19 @@ export function Playlist(props) {
             setToast(true)
             setToastContent("An error occured")
         }
+    })()
     },[])
     return (
         <div className="main-body">
             <div className="heading">
-                <img src={playlist}/>Playlists
+                <img src={playlist} alt="Playlists"/>Playlists
             </div>
                 <div className="card-wrapper">
                     <ul className="list-playlist">
-                    {PlaylistState.playlist.map((item)=>{
+                    {PlaylistState.playlist.length > 0 ? PlaylistState.playlist.map((item)=>{
                         return <li className="list-item-inline"><Playlistcard source="https://i.ytimg.com/vi/KGMEhdaZ6ZY/maxresdefault.jpg" text={item.name} data={item}/></li>
                        
-                    })}
+                    }): <p className="empty-heading">No playlist created</p>}
                     </ul>
                 </div>
                 { toast && <Toast/>}

@@ -1,4 +1,4 @@
-import React,{useContext,createContext,useState,useReducer} from 'react'
+import React,{useContext,createContext,useReducer} from 'react'
 import {PlaylistReducer} from '../Reducer'
 
 const PlaylistContext = createContext()

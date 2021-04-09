@@ -7,5 +7,7 @@ export function SavedReducer(state,action){
             return {...state,savedvideos:state.savedvideos.filter((video)=>video.id !== action.payload.id)}
         case "REFRESH-STATE":
             return action.payload
+        default:
+            return state
     }
 }

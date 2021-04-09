@@ -10,7 +10,6 @@ export function Checkbox(props) {
     const [CheckedState,setCheckedState] = useState(checked)
     console.log(checked)
     async function AddToPlaylist(type,event,data){
-        console.log(checked)
         if(type === "ADD-TO-PLAYLIST"){
             if(!CheckedState){
              console.log(event.target.value)
@@ -33,7 +32,7 @@ export function Checkbox(props) {
 
     return (
         <div>
-            <input type="checkbox" checked={CheckedState} onClick={(e)=>AddToPlaylist("ADD-TO-PLAYLIST",e,data)} value={name}/>{name}
+            <input type="checkbox" class="checkbox" checked={CheckedState} onClick={(e)=>AddToPlaylist("ADD-TO-PLAYLIST",e,data)} value={name}/>{name}
             </div>
     )
 }

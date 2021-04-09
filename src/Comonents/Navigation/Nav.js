@@ -1,12 +1,8 @@
-import React,{useState,Fragment} from 'react'
-import {useRoute} from '../../Context'
+import React,{Fragment} from 'react'
 import {NavLink} from 'react-router-dom'
 
-import Close from './Assets/images/Close.svg'
 import home from './Assets/images/Home.svg'
-import homeF from './Assets/images/Home-f.svg'
 import like from './Assets/images/Like.svg'
-import likeF from './Assets/images/Like-f.svg'
 import playlist from './Assets/images/Playlist.svg'
 import search from './Assets/images/Search.svg'
 

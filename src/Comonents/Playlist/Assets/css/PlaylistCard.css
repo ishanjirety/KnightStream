@@ -45,11 +45,18 @@
     margin-left: 3px;
     color:#c2c2c2
 }
-.fa-ellipsis-v{
+.btn-delete{
     position:absolute;
     right:7px;
-    top:7px;
+    top:4px;
     font-size: 1.1rem;
+    background-color:transparent;
+    border:none;
+    border-radius: 50%;
+    transition: 0.3s ease;
+}
+.btn-delete:hover{
+    background-color:rgba(243, 244, 246,0.1);
 }
 @media only screen and (min-width: 768px){
     .playlist-card{

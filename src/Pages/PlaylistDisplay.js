@@ -1,11 +1,10 @@
 import React,{useEffect,useState} from 'react'
-import axios from 'axios'
 import {useParams} from 'react-router-dom'
 
-import {usePlaylist,useToast} from '../Context'
+import {usePlaylist} from '../Context'
 
 
-import {Playlistcard,Toast,Videodescription} from '../Comonents'
+import {Videodescription} from '../Comonents'
 
 
 import playlist from '../Common-Assets/Playlist.svg'
@@ -15,7 +14,6 @@ import './Responsive-pages.css'
 export function PlaylistDisplay(props) {
     const {PlaylistState} = usePlaylist()
     const [Foundplaylist,setFoundPlaylist] = useState()
-    const {value} = props
     const {playlistId} = useParams()
     useEffect(()=>{
         console.log(PlaylistState)
@@ -28,7 +26,7 @@ export function PlaylistDisplay(props) {
         <div className="main-body">
             {console.log(Foundplaylist)}
             <div className="heading">
-                <img src={playlist}/>{playlistId}
+                <img src={playlist} alt="Playlist"/>{playlistId}
             </div>
                 <div className="card-wrapper">
                     <ul className="list-playlist">

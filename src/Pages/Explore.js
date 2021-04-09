@@ -1,15 +1,14 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect} from 'react'
 import axios from 'axios'
 
 // @desc common image assets
-import home from '../Common-Assets/Home.svg'
 import search from '../Common-Assets/Search.svg'
 import search_white from '../Common-Assets/Search-white.svg'
 
-import {useToast,useVideo} from '../Context'
+import {useVideo} from '../Context'
 
 // @desc importing components
-import {Videocard,Videodescription} from '../Comonents'
+import {Videodescription} from '../Comonents'
 
 // @desc importing styles
 import './styles.css'
@@ -18,35 +17,38 @@ import './Responsive-pages.css'
 let savedVideoListt = ""
 export function Explore() {
     
-    const {setToastContent,setToast} = useToast()
-
     const {setVideo,video} = useVideo()
 
-    const [searchQuery,setSearchQuery] = useState()
-
-    useEffect(async ()=>{
+    useEffect(()=>{
+        (async function fetchData(){
        const response_videolist = await axios.get('http://127.0.0.1:4444/api/videolist')
        const video_list = response_videolist.data.videos
        savedVideoListt = video_list
        setVideo(video_list)
+        })()
     },[])
 
-    function onChangeHandler(e){
-        if(e!=""){    
+    function onEnterPress(e){
+        console.log(e)
+        if(e!==""){    
             setVideo((item)=>item.filter((video)=>video.title.toLowerCase().includes(e.toLowerCase())))
         }
         else{
             setVideo(savedVideoListt)
-        }
+            }
         }
 
+        function onChangeHandler(e){
+                setVideo(savedVideoListt)
+                onEnterPress(e.target.value)
+        }
     return (
             <div className="main-body">
                 <div className="heading search">
-                <p > <img src={search_white}/> Explore</p>
+                <p > <img src={search_white} alt="Explore"/> Explore</p>
                     <div className="search-bar">
-                    <img src={search} className="search-icon"/>
-                    <input className="search-input" onChange={(e)=>onChangeHandler(e.target.value)} placeholder="Search"></input>
+                    <img src={search} className="search-icon" alt="search"/>
+                    <input className="search-input" onChange={onChangeHandler} placeholder="Search"></input>
                 </div>
             </div>
             <div className="card-wrapper">

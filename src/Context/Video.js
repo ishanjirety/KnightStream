@@ -15,5 +15,3 @@ export function Video({children}) {
 export function useVideo(){
     return useContext(VideoContext)
 }
-
-let videoList = []

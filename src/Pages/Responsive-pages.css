@@ -31,6 +31,10 @@
         width:90%;
         margin-left:0.5rem;
     }
+    .login{
+        background-image: url(./Images/background-desktop.jpg);
+    }
+
 
 }
 @media only screen and (max-width: 768px){
