@@ -405,16 +405,16 @@ label{
     color:white;
     padding:0;
 }
-.input:focus~label{
+input:focus ~ label,
+input:valid ~ label{
     transform: translateY(-20px);
     font-size:0.7rem;
-}
-.input:focus{
-    border-bottom: 1.5px solid var(--text-color-logo);
+    color:var(--text-color-logo)
 }
 
-input:focus ~ label{
-    transform: translateY(-50px);
+
+.input:focus{
+    border-bottom: 1.5px solid var(--text-color-logo);
 }
 .login-btn{
     margin-top: 2rem;
