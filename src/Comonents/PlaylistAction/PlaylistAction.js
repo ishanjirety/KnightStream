@@ -18,7 +18,7 @@ export function PlaylistAction(props) {
     
     async function AddPlaylist(){
         if(playlistName !== ""){
-            const response_playlist = await axios.post("http://127.0.0.1:4444/api/playlist/add", {name:playlistName,count:0,videos:[],date:date} )
+            const response_playlist = await axios.post("https://KnightStream.ishanjirety.repl.co/api/playlist/add", {name:playlistName,count:0,videos:[],date:date} )
             console.log(response_playlist)
             PlaylistDispatcher({type:"ADD-PLAYLIST",payload:{name:playlistName,count:0,videos:[]}})
         }

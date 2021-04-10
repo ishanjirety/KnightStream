@@ -29,14 +29,14 @@ export function Videodisplay() {
     useEffect(()=>{
         (async function fetchData(){
         // Finding Video From URL Param
-        const response_videolist = await axios.get('http://127.0.0.1:4444/api/videolist')
+        const response_videolist = await axios.get('https://KnightStream.ishanjirety.repl.co/api/videolist')
         const video_list = await response_videolist.data.videos
         const video = await video_list.find((item)=>item.id===videoId)
         setFoundVideo(video)
         video.isLiked ? setLiked("LIKED") : setLiked("UNLIKED")
 
         // Getting Saved List
-        const response_saved = await axios.get("http://127.0.0.1:4444/api/saved")
+        const response_saved = await axios.get("https://KnightStream.ishanjirety.repl.co/api/saved")
         const parsed_video = await response_saved.data.saved.savedvideos
 
         if(parsed_video !== undefined && parsed_video.length !== 0){
@@ -45,7 +45,7 @@ export function Videodisplay() {
         }
 
         // Fetching Playlists
-        const response_playlist = await axios.get("http://127.0.0.1:4444/api/playlist")
+        const response_playlist = await axios.get("https://KnightStream.ishanjirety.repl.co/api/playlist")
         const playlist = response_playlist.data.playlists
         PlaylistDispatcher({type:"REFRESH-PLAYLIST",payload:playlist})
     })()
@@ -55,12 +55,12 @@ export function Videodisplay() {
     (async function fetchData(){
         try{
         if(liked==="LIKED"){
-            await axios.post('http://127.0.0.1:4444/api/liked/add',FoundVideo)
+            await axios.post('https://KnightStream.ishanjirety.repl.co/api/liked/add',FoundVideo)
             likedDispatch({type:"ADD-TO-LIKED",payload:FoundVideo})
             setLiked("LIKED") 
         }
         if(liked==="UNLIKED"){
-            await axios.post('http://127.0.0.1:4444/api/liked/remove',FoundVideo)
+            await axios.post('https://KnightStream.ishanjirety.repl.co/api/liked/remove',FoundVideo)
             likedDispatch({type:"REMOVE-FROM-LIKED",payload:FoundVideo})
             setLiked("UNLIKED")
         }
@@ -77,14 +77,14 @@ export function Videodisplay() {
                     setSaveToggle(true)
                     const TEXT = notes.replace(/\n/g,"[nl]")
                     console.log(TEXT)
-                    const response_saved = await axios.post('http://127.0.0.1:4444/api/save/add',{...FoundVideo,notes:notes})
+                    const response_saved = await axios.post('https://KnightStream.ishanjirety.repl.co/api/save/add',{...FoundVideo,notes:notes})
                     console.log("SAVED : ",response_saved)
                     savedDispatch({type:"ADD-TO-SAVED",payload:{...FoundVideo,notes:notes}})
                     setTimeout(()=>setSaveToggle(false),2000)
                     break
                 case "DELETE" :
                 console.log(FoundVideo)
-                await axios.post('http://127.0.0.1:4444/api/save/remove',FoundVideo)
+                await axios.post('https://KnightStream.ishanjirety.repl.co/api/save/remove',FoundVideo)
                 savedDispatch({type:"REMOVE-FROM-SAVED",payload:FoundVideo})
                 setSaveToggle(false)
                 setOpenModal(false)

@@ -4,7 +4,7 @@ import axios from 'axios'
 import {usePlaylist,useToast} from '../Context'
 
 
-import {Playlistcard,Toast} from '../Comonents'
+import {Playlistcard,Toast,ProfileButton} from '../Comonents'
 
 
 import playlist from '../Common-Assets/Playlist.svg'
@@ -19,7 +19,7 @@ export function Playlist(props) {
     useEffect(()=>{
         (async function fetchData(){
         try{
-        const response_playlist = await axios.get('http://127.0.0.1:4444/api/playlist')
+        const response_playlist = await axios.get('https://KnightStream.ishanjirety.repl.co/api/playlist')
         const playlist = response_playlist.data.playlists   
         console.log(playlist)
         PlaylistDispatcher({type:"REFRESH-PLAYLIST",payload:playlist})
@@ -34,6 +34,7 @@ export function Playlist(props) {
         <div className="main-body">
             <div className="heading">
                 <img src={playlist} alt="Playlists"/>Playlists
+                <ProfileButton/>    
             </div>
                 <div className="card-wrapper">
                     <ul className="list-playlist">

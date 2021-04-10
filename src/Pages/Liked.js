@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react'
 import axios from 'axios'
 
-import {Toast,Videodescription} from '../Comonents'
+import {Toast,Videodescription,ProfileButton} from '../Comonents'
 
 import {useToast,useLike} from '../Context'
 
@@ -19,7 +19,7 @@ export function Liked(props) {
     useEffect(()=>{
         (async function fetchData(){
         try{
-        const response_liked = await axios.get('http://127.0.0.1:4444/api/liked')
+        const response_liked = await axios.get('https://KnightStream.ishanjirety.repl.co/api/liked')
         const Liked = response_liked.data.liked   
         likedDispatch({type:"REFRESH-LIKED",payload:Liked})
         }
@@ -33,6 +33,7 @@ export function Liked(props) {
         <div className="main-body">
             <div className="heading">
                 <img src={Like} alt="Like"/>Liked Videos
+                <ProfileButton/>
             </div>
                 <div className="card-wrapper">
                     <div className="video-home">

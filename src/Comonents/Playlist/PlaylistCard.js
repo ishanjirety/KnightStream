@@ -12,7 +12,7 @@ export function Playlistcard(props) {
     const thumbnail_hq = data.videos[0] !== undefined ? "https://img.youtube.com/vi/"+data.videos[0].id+"/mqdefault.jpg" : "https://images.wallpaperscraft.com/image/chess_figures_horse_black_white_8790_1366x768.jpg"
 
     async function DeleteHandler(){
-        await axios.post('http://127.0.0.1:4444/api/playlist/remove',{name})
+        await axios.post('https://KnightStream.ishanjirety.repl.co/api/playlist/remove',{name})
         PlaylistDispatcher({type:"REMOVE-PLAYLIST",payload:{name:name}})
     }
 

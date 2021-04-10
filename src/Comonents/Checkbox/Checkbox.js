@@ -13,7 +13,7 @@ export function Checkbox(props) {
         if(type === "ADD-TO-PLAYLIST"){
             if(!CheckedState){
              console.log(event.target.value)
-              const response_playlist_add = await axios.post("http://127.0.0.1:4444/api/playlist/item/add",{name:event.target.value,video:data})
+              const response_playlist_add = await axios.post("https://KnightStream.ishanjirety.repl.co/api/playlist/item/add",{name:event.target.value,video:data})
               console.log(response_playlist_add.data)
               PlaylistDispatcher({type:"ADD-TO-PLAYLIST",payload:{data:data,name:event.target.value}})
               setCheckedState(true)
@@ -21,7 +21,7 @@ export function Checkbox(props) {
             }
             else if(CheckedState){
                 console.log(event.target.value)
-                const response_playlist_remove = await axios.post("http://127.0.0.1:4444/api/playlist/item/remove",{name:event.target.value,video:data})
+                const response_playlist_remove = await axios.post("https://KnightStream.ishanjirety.repl.co/api/playlist/item/remove",{name:event.target.value,video:data})
                 console.log(response_playlist_remove)
                 PlaylistDispatcher({type:"REMOVE-FROM-PLAYLIST",payload:{data:data,name:event.target.value}})
                 setTimeout(()=>console.log(PlaylistState),2000)

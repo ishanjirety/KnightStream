@@ -1,6 +1,6 @@
 import React,{useEffect} from 'react'
 import axios from 'axios'
-import {Videodescription,Playlistcard} from '../Comonents'
+import {Videodescription,Playlistcard,ProfileButton} from '../Comonents'
 import {Link} from 'react-router-dom'
 import {usePlaylist,useLike} from '../Context'
 
@@ -9,11 +9,11 @@ export function Home() {
     const {likedState,likedDispatch} = useLike()
     useEffect(()=>{
         (async function fetchData(){
-        const response_playlist = await axios.get("http://127.0.0.1:4444/api/playlist")
+        const response_playlist = await axios.get("https://KnightStream.ishanjirety.repl.co/api/playlist")
         const Playlist = response_playlist.data.playlists
         PlaylistDispatcher({type:"REFRESH-PLAYLIST",payload:Playlist})
 
-        const response_liked = await axios.get('http://127.0.0.1:4444/api/liked')
+        const response_liked = await axios.get('https://KnightStream.ishanjirety.repl.co/api/liked')
         const Liked = response_liked.data.liked   
         likedDispatch({type:"REFRESH-LIKED",payload:Liked})
         })()
@@ -22,12 +22,8 @@ export function Home() {
         <div className="main-body home">
             <div className="heading logo">
                 <p>KnightStream</p>
+                <ProfileButton/>    
             </div>
-            {/* <div className="nav-options">
-                <p>Recommended </p>
-                <div className="display-items">
-                </div>
-            </div> */}
             <div className="nav-options">
                 <p>Playlist {PlaylistState.playlist.length !== 0 ? <Link className="nav-options-link" to="/playlist">View More</Link>: <Link className="nav-options-link" to="/explore">Explore</Link> }</p>
                 <div className="display-items">
