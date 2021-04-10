@@ -97,3 +97,9 @@
         display:none
     }
 }
+@media only screen and (max-width: 768px){
+    .video-card-desktop{
+        display:none !important;
+        visibility: hidden;
+    }   
+}

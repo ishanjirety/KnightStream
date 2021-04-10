@@ -53,6 +53,7 @@
     height: auto;
     position: relative;
 }
+
 .saved-heading span{
     /* padding:0 0 1rem 0 ; */
     border-bottom: 2px solid var(--border-color);
@@ -353,6 +354,7 @@ textarea{
     justify-content:center;
     align-items: center;
     font-family: 'Roboto', sans-serif;
+    z-index: var(--index-10);
 }
 .login-card{
     color:white;
@@ -412,7 +414,6 @@ input:valid ~ label{
     color:var(--text-color-logo)
 }
 
-
 .input:focus{
     border-bottom: 1.5px solid var(--text-color-logo);
 }
@@ -426,9 +427,66 @@ input:valid ~ label{
     background-color:rgba(188,160,53,0.4);
     border:none;
     border-radius: 2rem;
+    transition: 0.3s ease;
+}
+.login-btn:hover{
+    background-color:rgba(188,160,53,0.7);
+}
+.forgot-password-field{
+    display:flex;
+    width: 75%;
+    justify-content:flex-end;
+    position: relative;
+}
+.forgot-password{
+    color:white;
+    font-size: 0.7rem;
+    margin:0.3rem 0 0 0 ;
+    font-weight: lighter;
+    text-decoration: none;
+}
+.signup{
+    font-size: 0.7rem;
+    justify-self: flex-end;
+}
+.error-login{
+    font-size: 0.8rem;
+    width:75%;
+    text-align: left;
+    color:#d34e4d;
+    width:auto;
+    position: absolute;
+    left:0;
+    margin:0.3rem 0 0 0 ;
+    font-weight: lighter;
 }
 
-
+/* Account */
+.account{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items: center;
+    color:white;
+    font-family: 'Roboto', sans-serif;
+    width:75%;
+}
+.account-heading{
+    margin:0;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing:1px;
+    color:white;
+    width:auto;
+}
+.account-error{
+    position: relative;
+    width:100%;
+    margin:0;
+}
+.account-field{
+    margin:0;
+    height:auto;
+}
 @keyframes zoomin{
     from{
         transform:scale(0)

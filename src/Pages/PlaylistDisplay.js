@@ -4,7 +4,7 @@ import {useParams} from 'react-router-dom'
 import {usePlaylist} from '../Context'
 
 
-import {Videodescription} from '../Comonents'
+import {Videodescription,ProfileButton} from '../Comonents'
 
 
 import playlist from '../Common-Assets/Playlist.svg'
@@ -27,6 +27,7 @@ export function PlaylistDisplay(props) {
             {console.log(Foundplaylist)}
             <div className="heading">
                 <img src={playlist} alt="Playlist"/>{playlistId}
+                <ProfileButton/>    
             </div>
                 <div className="card-wrapper">
                     <ul className="list-playlist">

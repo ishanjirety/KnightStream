@@ -10,7 +10,10 @@
     count:0,
     savedvideos:[],
 }
-
+let users = {
+    count:0,
+    user:[{username:"ishan",password:"1234"}]
+}
   let videoList = [
         {
             id:"MJC4wFdMMyc",
@@ -171,4 +174,4 @@
         }
 ]
 
-module.exports = { videoList,playlists,liked,saved };
+module.exports = { videoList,playlists,liked,saved,users };

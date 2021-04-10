@@ -11,7 +11,7 @@ app.use(cors())
 
 //@desc Importing Databases
 const database = require('./database')
-let {videoList,playlists,liked,saved} = database
+let {videoList,playlists,liked,saved,users} = database
 
 
 // @route Videolist operatioins
@@ -130,6 +130,79 @@ app.post("/api/save/remove",(req,res)=>{
     })
 })
 
+// @route Authentication
+app.post('/api/signup',(req,res)=>{
+    const request_body = req.body
+    users= {...users,count:users.count+1,user:[...users.count,request_body]}
+    res.json({
+        status:200,
+        comment:`user ${request_body.username} added`,
+        data:users
+    })
+})
+app.post('/api/login',(req,res)=>{
+    const request_body = req.body
+    const status = users.user.filter(user=>user.username===request_body.username && user.password===request_body.password).length
+    if(status===0){
+        res.json({
+            status:401,
+            comment:`username ${request_body.username} not found`
+        })
+        res.end()
+    }
+    else{
+        res.json({
+            status:200,
+            comment:`username ${request_body.username} found`
+        })
+    res.end()
+}
+})
+app.post('/api/upDatetoken',(req,res)=>{
+    const request_body = req.body
+    console.log(request_body.token)
+    users = {...users,user:users.user.map(usr=>usr.username === request_body.username ? {...usr,token:request_body.token}:usr)}
+    console.log(users)
+    res.json({
+        status:200,
+        comment:`Updated token of ${request_body.username}`        
+    })
+})
+app.post('/api/searchuser',(req,res)=>{
+    const request_body = req.body
+    console.log(request_body)
+    const foundUser = users.user.find(user=>user.token === request_body.token)
+    if(foundUser !== undefined){
+        res.json({
+            status:200,
+            comment:`found ${foundUser.username}`
+        })
+    }
+    else{
+        res.json({
+            status:401,
+            comment:`could not find username with token ${request_body.token}`
+        })
+    }
+})
+app.post('/api/users/update',(req,res)=>{
+    const request_body = req.body
+    const user = users.user.find(user=>user.username===request_body.username)
+    if(user!== undefined){
+        users = {...users,user:users.user.map(user=>user.username===request_body.username ? {...user,password:request_body.password} : user)}
+        res.json({
+            status:200,
+            comment:`${request_body.username} update succssfully`,
+            data:users
+        })
+    }
+    else{
+        res.json({
+            status:403,
+            comment:`could not find ${request_body.username}`,
+        })
+    }
+})
 app.listen(4444,()=>{
     console.log("listening on port 4444")
 })

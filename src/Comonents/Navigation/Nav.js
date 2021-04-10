@@ -5,6 +5,7 @@ import home from './Assets/images/Home.svg'
 import like from './Assets/images/Like.svg'
 import playlist from './Assets/images/Playlist.svg'
 import search from './Assets/images/Search.svg'
+import account from '../../Common-Assets/Account.svg'
 
 
 
@@ -37,8 +38,6 @@ export function Nav() {
                         <img src={playlist}></img>
                    </NavLink> <span className="btn-description">Playlist</span>
                    </li>
-
-                
                 </ul>
             </nav>
             <nav className="sidebar">
@@ -64,7 +63,6 @@ export function Nav() {
                         <img src={like}></img>
                         <span className="btn-description">Liked Videos</span>
                         </li>
-                        
                    </NavLink> 
                     
                    
@@ -73,8 +71,14 @@ export function Nav() {
                         <img src={playlist}></img>
                         <span className="btn-description">Playlist</span>
                         </li>
-                        
                    </NavLink> 
+
+                   <NavLink to="/account" className="nav-btn sidebar-btn">
+                         <li className="list-item-inline sidebar-list-item">
+                        <img src={account}></img>
+                        <span className="btn-description">Account</span>
+                        </li>
+                   </NavLink>
                 </ul>
             </nav>
         </Fragment>
