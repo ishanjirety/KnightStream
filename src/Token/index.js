@@ -1,2 +1,1 @@
-export {setToken} from './Token'
-export {getToken} from './Token'
+export {setToken,getToken,removeToken} from './Token'

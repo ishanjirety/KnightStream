@@ -6,7 +6,7 @@ import {Protected} from './ProtectedRoute'
 import {useAuth} from './Context'
 import {getToken} from './Token' 
 
-import {Nav,Splashscreen} from './Comonents'
+import {Redirect,Nav,Splashscreen} from './Comonents'
 import {Login,Playlist,Explore,Videodisplay,Liked,Home,NotFound404,PlaylistDisplay,Account} from './Pages'
 import {Routes,Route} from 'react-router-dom'
 

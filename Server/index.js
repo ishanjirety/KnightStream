@@ -7,7 +7,11 @@ const app = express()
 app.use(express.json())
 
 // @desc to prevent Cross-Origin Resource Sharing error
-app.use(cors())
+const corsOptions = {
+    origin:"https://1rqud.csb.app/",
+    optionSuccessStatus:200
+  }
+app.use(cors(corsOptions))
 
 //@desc Importing Databases
 const database = require('./database')
@@ -144,7 +148,7 @@ app.post('/api/login',(req,res)=>{
     const request_body = req.body
     const status = users.user.filter(user=>user.username===request_body.username && user.password===request_body.password).length
     if(status===0){
-        res.json({
+        res.status(401).json({
             status:401,
             comment:`username ${request_body.username} not found`
         })

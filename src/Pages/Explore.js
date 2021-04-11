@@ -18,7 +18,6 @@ let savedVideoListt = ""
 export function Explore() {
     
     const {setVideo,video} = useVideo()
-
     useEffect(()=>{
         (async function fetchData(){
        const response_videolist = await axios.get('https://KnightStream.ishanjirety.repl.co/api/videolist')
@@ -31,16 +30,12 @@ export function Explore() {
     function onEnterPress(e){
         if(e!==""){    
             setVideo((item)=>item.filter((video)=>video.title.toLowerCase().includes(e.toLowerCase())))
-            console.log(video)
-        }
-        else{
-            setVideo(savedVideoListt)
             }
         }
 
         function onChangeHandler(e){
                 setVideo(savedVideoListt)
-                onEnterPress(e.target.value)
+                onEnterPress(e.target.value) //
         }
     return (
             <div className="main-body">
@@ -51,7 +46,6 @@ export function Explore() {
                     <div className="search-bar">
                     <img src={search} className="search-icon" alt="search"/>
                     <input className="search-input" onChange={onChangeHandler} placeholder="Search"></input>
-                    
                 </div>
             </div>
             <div className="card-wrapper">

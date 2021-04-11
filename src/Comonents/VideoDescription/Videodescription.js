@@ -19,14 +19,6 @@ export function Videodescription(props) {
 
     return (
         <Fragment>
-        <div className="video-card" key={data.id}>
-            <img className="video-thumbnail" src={thumbnail_mq}></img>
-            <div className="video-info">
-             <Link to={`/video/${data.id}`} className="video-text">{title===undefined ? name : title}</Link>
-             <small className="credits">{channelName}</small>
-             <small className="date">2 Years Ago</small>
-             </div>
-        </div>
         <div className="video-card-desktop" key={data.id}>
             <img className="video-thumbnail" src={thumbnail_hq}></img>
             <div className="video-info">

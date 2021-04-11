@@ -487,6 +487,26 @@ input:valid ~ label{
     margin:0;
     height:auto;
 }
+.logout-btn{
+    background-color:transparent;
+    color:white;
+    border:none;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    position: absolute;
+    top:0.2rem;
+    right:0.5rem;
+    border-radius:3px;
+    padding:0.3rem;
+    transition: 0.3s ease;
+}
+.logout-btn:hover{
+    background-color:rgba(71,71,71,0.3)
+}
+.logout-btn .fa{
+    margin-left: 0.3rem;
+}
 @keyframes zoomin{
     from{
         transform:scale(0)

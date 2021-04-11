@@ -5,3 +5,6 @@ export function getToken(){
     const key = JSON.parse(localStorage.getItem("isLoggedin"))
     return key
 }
+export function removeToken(){
+    localStorage.removeItem("isLoggedin")
+}

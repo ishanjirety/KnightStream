@@ -21,7 +21,6 @@ export function Playlist(props) {
         try{
         const response_playlist = await axios.get('https://KnightStream.ishanjirety.repl.co/api/playlist')
         const playlist = response_playlist.data.playlists   
-        console.log(playlist)
         PlaylistDispatcher({type:"REFRESH-PLAYLIST",payload:playlist})
         }
         catch(e){

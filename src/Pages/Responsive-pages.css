@@ -37,6 +37,9 @@
     .login-card{
         width:30%;
     }
+    .logout-btn{
+        top:1rem;
+    }
 
 
 }
@@ -51,7 +54,7 @@
         flex-wrap: wrap;
     }
     textarea{
-        height:9.5rem;
+        height:6.3rem;
     }
     .note-controlls{
         height:3.5rem;
@@ -61,7 +64,6 @@
         /* top:300%; */
         top:1rem;  
     }
-    
     .liked{
         flex-wrap: wrap;
     }
