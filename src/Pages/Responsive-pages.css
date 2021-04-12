@@ -32,7 +32,7 @@
         margin-left:0.5rem;
     }
     .login{
-        background-image: url(./Images/background-desktop.jpg);
+        background-image: url(./Images/bg-texture.svg);
     }
     .login-card{
         width:30%;
@@ -40,8 +40,6 @@
     .logout-btn{
         top:1rem;
     }
-
-
 }
 @media only screen and (max-width: 768px){
     .list-playlist{
@@ -70,5 +68,8 @@
     .display-items{
         display: flex;
         flex-wrap: wrap;
+    }
+    .login{
+        background-image: url(./Images/bg-texture-mobile.svg);
     }
 }

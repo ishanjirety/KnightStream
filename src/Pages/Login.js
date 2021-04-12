@@ -46,21 +46,26 @@ export function Login() {
     },[])
     return (
         <div className="login">
+            <div className="login-logo">
+                <span class="login-underline">
+                    <p className="login-border">KnightStream</p>
+                </span>
+            </div>  
             <section className="login-card">
-                <span className="login-border"><p>KnightStream</p></span>
+                <p className="login-greeting">WELCOME BACK</p>
+                <p className="login-heading">Login to your account</p>
                 <div className="input-fields">    
                    <input  className="input" required onChange={(e)=>setUsername(e.target.value)}/><label>Username</label>
                 </div>
                 <div className="input-fields">    
                    <input className="input" required type="password" onChange={(e)=>setPassword(e.target.value)}/><label>Password</label>
                 </div>
-                
                 <div className="forgot-password-field">
                { error && <p className="error-login">Invalid Credentials</p>}
                 <Link to="/forgot-password" className="forgot-password">Forgot password?</Link>
                 </div>
                 <button className="login-btn" type="submit" onClick={onSubmitHandler}>Login</button>
-                <Link to="/forgot-password" className="forgot-password signup">New? Sign up - it's FREE!
+                <Link to="/signup" className="forgot-password signup">Not registered yet? <span className="inverted">Register &rarr; </span>
                 </Link>
             </section>
             <Redirect display={redirect} to={state?.from === "/" ? "home" : state?.from.replace("/","")}/>

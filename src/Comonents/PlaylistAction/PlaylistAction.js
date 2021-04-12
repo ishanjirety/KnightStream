@@ -21,12 +21,13 @@ export function PlaylistAction(props) {
             const response_playlist = await axios.post("https://KnightStream.ishanjirety.repl.co/api/playlist/add", {name:playlistName,count:0,videos:[],date:date} )
             console.log(response_playlist)
             PlaylistDispatcher({type:"ADD-PLAYLIST",payload:{name:playlistName,count:0,videos:[]}})
+            setPlaylistName("")
         }
     }
     useEffect(()=>{
         const current = new Date()
         const date = current.getDate()
-        const month = current.getMonth()
+        const month = current.getMonth() + 1
         const year = current.getFullYear()
         const FINAL_DATE = `${date}-${month}-${year}`
         setDate(FINAL_DATE)
@@ -46,7 +47,7 @@ export function PlaylistAction(props) {
             })}
             </div>
             <div className="playlist-action">
-                <input placeholder="Enter playlist name..." className="add-playlist" onChange={(e)=>setPlaylistName(e.target.value)}></input>
+                <input placeholder="Enter playlist name..." className="add-playlist" onChange={(e)=>setPlaylistName(e.target.value)} value={playlistName}></input>
                 <button className="playlist-add-action" onClick={()=>AddPlaylist("ADD-TO-PLAYLIST")}>ADD</button>
             </div>
        </div>
@@ -65,7 +66,7 @@ export function PlaylistAction(props) {
             })}
             </div>
             <div className="playlist-action-desktop">
-                <input placeholder="Enter playlist name..." className="add-playlist" onChange={(e)=>setPlaylistName(e.target.value)}></input>
+                <input placeholder="Enter playlist name..." className="add-playlist" onChange={(e)=>setPlaylistName(e.target.value)} value={playlistName}></input>
                 <button className="playlist-add-action" onClick={()=>AddPlaylist("ADD-TO-PLAYLIST")}>CREATE</button>
             </div>
        </div>

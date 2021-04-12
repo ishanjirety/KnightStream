@@ -7,7 +7,7 @@ import {useAuth} from './Context'
 import {getToken} from './Token' 
 
 import {Redirect,Nav,Splashscreen} from './Comonents'
-import {Login,Playlist,Explore,Videodisplay,Liked,Home,NotFound404,PlaylistDisplay,Account} from './Pages'
+import {Login,Playlist,Explore,Videodisplay,Liked,Home,NotFound404,PlaylistDisplay,Account,Signup,Forgotpassword} from './Pages'
 import {Routes,Route} from 'react-router-dom'
 
 function App() {
@@ -54,8 +54,9 @@ function App() {
         <Protected path="/account" element={<Account/>} />
         <Route path="/playlist/:playlistId" element={<PlaylistDisplay/>}></Route>
         <Route path='/login' element={<Login/>}/>
+        <Route path="/signup" element={<Signup/>}/>
+        <Route path="/forgot-password" element={<Forgotpassword/>}/>
         <Route path="*" element={<NotFound404/>}/>
-
         
       </Routes>
       {SplashscreenDisplay && <Splashscreen animation ={splashScreen}/>}
