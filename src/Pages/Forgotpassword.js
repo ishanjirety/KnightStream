@@ -12,7 +12,12 @@ export function Forgotpassword() {
             </div>  
             <section className="login-card signup-card">
             <p className="login-greeting">Forgot Password ? </p>
-                <div className="question">Q. What is your cat's name</div>
+                <div className="input-fields">    
+                   <input className="input" required type="text" /><label>Username</label>
+                </div>
+
+                <div className="question signup-question">Q. What is your cat's name</div>
+                
                 <div className="input-fields">    
                    <input className="input" required type="text" /><label>Answer</label>
                 </div>
@@ -24,7 +29,6 @@ export function Forgotpassword() {
                         <input className="input" required type="password" />
                         <label>Re-Enter Password</label>
                 </div>
-              
                 <div className="forgot-password-field">
                {/* { error && <p className="error-login">Invalid Credentials</p>} */}
                 </div>

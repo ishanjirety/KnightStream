@@ -57,7 +57,7 @@ function App() {
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/forgot-password" element={<Forgotpassword/>}/>
         <Route path="*" element={<NotFound404/>}/>
-        
+
       </Routes>
       {SplashscreenDisplay && <Splashscreen animation ={splashScreen}/>}
       

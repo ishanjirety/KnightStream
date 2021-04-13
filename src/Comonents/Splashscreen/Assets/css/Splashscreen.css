@@ -2,7 +2,7 @@
 :root{
     --screen-background:#212121;
     --logo-color:#E2E2E2;
-    --text-color-logo:#bca035;
+    --text-color-logo:#006166;
 }
 .splashscreen{
     height:100vh;
@@ -36,7 +36,8 @@
     position: absolute;
     font-family: 'Carter One', cursive;
     font-size: 2.2rem;
-    color:var(--logo-color);
+    /* color:var(--logo-color); */
+    color:#00aeb8 !important;
     top:39.5%;
     left:25%;
     display:flex;
