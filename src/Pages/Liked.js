@@ -32,7 +32,7 @@ export function Liked(props) {
     return (
         <div className="main-body">
             <div className="heading">
-                <img src={Like} alt="Like"/>Liked Videos
+                <img src={Like} alt="Like"/><p>Liked Videos</p>
                 <ProfileButton/>
             </div>
                 <div className="card-wrapper">

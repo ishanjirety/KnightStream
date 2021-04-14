@@ -60,6 +60,7 @@ function App() {
 
       </Routes>
       {SplashscreenDisplay && <Splashscreen animation ={splashScreen}/>}
+
       
     </div>
   );

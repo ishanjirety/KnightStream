@@ -37,8 +37,10 @@
     z-index: var(--index-10);
 }
 .logo{
-    color: var(--text-color-100);
-    font-size: 1.3rem;
+    color: #f9f9f9;
+    font-family: 'Fredoka One', cursive;
+    /* text-shadow:  -3px 0px 3px #686565; */
+    font-size: 1.5rem;
 }
 .nav-btn{
     background-color:transparent;

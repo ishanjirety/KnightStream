@@ -1,36 +1,53 @@
-import React,{useReducer,useState} from 'react'
+import React,{useReducer,useState,useEffect} from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
-import {Redirect} from '../Comonents'
 export function Signup() {
     const [textInputState,textInputDispatcher] = useReducer(inputDispatcher,{username:"",password:"",rePassword:"",answer:""})
+    
+    
     const [visibilityErr,setErrVisibility] = useState("hidden")
-    const [visibilitySuccess,setSuccessVisibility] = useState("hidden")
+    const [Alertclass,setAlertClass] = useState("alert")
+    const [faClass,setFaClass] = useState("fa-check-circle-o")
     const [content,setContent] = useState("")
+
+    const [signupContent,setSignupContent] = useState("Sign up")
     async function userSignup(){
         try{
             if(textInputState.password === textInputState.rePassword){
+                setSignupContent("Signing up...")
             const response_signup = await axios.post("https://KnightStream.ishanjirety.repl.co/api/signup",textInputState)
             console.log(response_signup.data)
             if(response_signup.data.status===200){
                 setContent("User created successfully")
-                setSuccessVisibility("visible")
-                setErrVisibility("hidden")
+                setAlertClass("alert animate")
+                setErrVisibility("visible")
+                setFaClass("fa-check-circle-o")
+                setSignupContent("Sign up")
             }
             else{
                 setContent("Could not create user")
-                setSuccessVisibility("hidden")
+                setAlertClass("alert danger animate")
                 setErrVisibility("visible")
+                setFaClass("fa-exclamation")
             }
             }else{
                 setErrVisibility("visible")
                 setContent("Password does not match")
-                setSuccessVisibility("hidden")
+                setAlertClass("alert danger animate")
+                setFaClass("fa-exclamation")
             }
         }catch(e){
             console.log(e)
+            setContent("Uh no! 500 Internal server error")
+            setAlertClass("alert danger animate")
+            setErrVisibility("visible")
+            setFaClass("fa-exclamation")
         }
     } 
+    useEffect(()=>{setTimeout(()=>{
+        setAlertClass("alert fade")
+        setErrVisibility("hidden")
+    },4000)},[visibilityErr])
     return (
         <div className="login">
             <div className="login-logo">
@@ -41,8 +58,7 @@ export function Signup() {
             <section className="login-card signup-card">
                 <p className="login-greeting">WELCOME</p>
                 <p className="login-heading">Create Account</p>
-                <div className="alert" style={{visibility:visibilitySuccess}}><i class="fa fa-check-circle-o"/>{content}</div>
-                <div className="alert danger" style={{visibility:visibilityErr}}><i class="fa fa-exclamation"/><p>{content}</p></div>
+                
                 <div className="input-fields">   
                    <input  className="input" required onChange={(e)=>textInputDispatcher({type:"ADD-USERNAME",payload:e.target.value})}/><label>Username</label>
                 </div>
@@ -60,10 +76,11 @@ export function Signup() {
                 <div className="forgot-password-field">
                {/* { error && <p className="error-login">Invalid Credentials</p>} */}
                 </div>
-                <button className="login-btn" type="submit" onClick={userSignup}>Sign up</button>
+                <button className="login-btn" type="submit" onClick={userSignup}>{signupContent}</button>
                 <Link to="/login" className="forgot-password signup">Alredy registered? <span className="inverted">Sign in &rarr; </span>
                 </Link>
             </section>
+            <div className={Alertclass} style={{visibility:visibilityErr}}><i class={`fa ${faClass}`}/><p>{content}</p></div>
         </div>
     )
 }

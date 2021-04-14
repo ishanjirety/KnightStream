@@ -1,12 +1,12 @@
 import React,{useEffect,useState,Fragment} from 'react'
-import {useParams} from 'react-router-dom'
+import {useParams,Link} from 'react-router-dom'
 import axios from 'axios'
 
 // @desc importing Components
 import {Videocard,PlaylistAction} from '../Comonents'
 
 // importing hooks 
-import {useLike,useSaved,usePlaylist} from '../Context'
+import {useLike,useSaved,usePlaylist,useAuth} from '../Context'
 
 // @desc common assets
 import playlist from '../Common-Assets/Playlist.svg'
@@ -16,7 +16,7 @@ export function Videodisplay() {
     const {likedDispatch} = useLike()
     const {savedDispatch} = useSaved()
     const{PlaylistDispatcher}=usePlaylist()
-
+    const {isLoggedin} = useAuth()
     const {videoId} = useParams()
 
     const [FoundVideo,setFoundVideo] = useState()
@@ -25,6 +25,7 @@ export function Videodisplay() {
     const [notes,setNotes] = useState("")
     const [OpenModal,setOpenModal] = useState(false)
     const [showPlaylist,setShowPlaylist] = useState(false)
+    const[loginModal,setLoginModal] = useState(true)
 
     useEffect(()=>{
         (async function fetchData(){
@@ -71,6 +72,8 @@ export function Videodisplay() {
     },[liked])
     
    async function SaveHandler(action){
+
+    if(isLoggedin){
         try{
             switch(action){
                 case "SAVE" :
@@ -95,8 +98,12 @@ export function Videodisplay() {
             }
             
             }
-        catch(e){
-            console.error("ERROR : COULD NOT SAVE", e)
+            catch(e){
+                console.error("ERROR : COULD NOT SAVE", e)
+            }
+        }
+        else{
+            setLoginModal(true)
         }
     }
     return (
@@ -108,8 +115,8 @@ export function Videodisplay() {
             <div className="description">
                 <p className="video-title">{FoundVideo.title}</p>
                 <div className="video-action-buttons">
-                    <input type="checkbox" className="btn-video-action fa fa-heart" onChange={()=>liked==="UNLIKED" || liked==="" ? setLiked("LIKED") : setLiked("UNLIKED")} checked={liked === "LIKED" ? true : false}></input>
-                    <button className="btn-video-action svg-btn" onClick={()=>setShowPlaylist(!showPlaylist)}><img alt="playlist" className="action-icon" src={playlist}></img></button>                  
+                    <span className="checkbox-span"><input type="checkbox" className="btn-video-action fa fa-heart" onChange={()=> isLoggedin ? liked==="UNLIKED" || liked==="" ? setLiked("LIKED") : setLiked("UNLIKED") : setLoginModal(true)} checked={liked === "LIKED" ? true : false}></input></span>
+                    <button className="btn-video-action svg-btn" onClick={()=>isLoggedin ? setShowPlaylist(!showPlaylist): setLoginModal(true) }><img alt="playlist" className="action-icon" src={playlist}></img></button>                  
                     
                     {/* <PlaylistAction/> */}
                 </div>
@@ -144,6 +151,22 @@ export function Videodisplay() {
                  { saveToggle && <img src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`} alt="saved" className="saved-image"></img>}
         </div>
             <PlaylistAction styles={showPlaylist ? {height:'15rem'} : {height:"0"}} data={FoundVideo} display={showPlaylist ? {display:"flex"} : {display:"none"}} state={setShowPlaylist}/>
+            {loginModal && <LoginModal state={setLoginModal}/>}
         </Fragment>
     )
 } 
+
+function LoginModal({state}){
+    return (
+        <div className="login-wrapper">
+            <div className="login-content">
+                <p>Oops! you are not logged in</p>
+                <div className="playlist-action-desktop">
+                    <button className="login-btn"><Link to="/login" >Login</Link></button>
+                    <button className="login-btn secondary" onClick={()=>state(!state)}>Cancel</button>
+                </div>
+            </div>
+            
+        </div>
+    )
+}

@@ -32,7 +32,7 @@ export function Playlist(props) {
     return (
         <div className="main-body">
             <div className="heading">
-                <img src={playlist} alt="Playlists"/>Playlists
+                <img src={playlist} alt="Playlists"/><p>Playlists</p>
                 <ProfileButton/>    
             </div>
                 <div className="card-wrapper">
