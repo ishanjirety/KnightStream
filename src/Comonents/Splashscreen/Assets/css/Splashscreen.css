@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Carter+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 :root{
     --screen-background:#212121;
     --logo-color:#E2E2E2;
-    --text-color-logo:#006166;
+    --text-color-logo:#f9f9f9;
 }
 .splashscreen{
     height:100vh;
@@ -34,10 +35,12 @@
 }
 .logo-area{
     position: absolute;
-    font-family: 'Carter One', cursive;
     font-size: 2.2rem;
     /* color:var(--logo-color); */
-    color:#00aeb8 !important;
+    color:#f9f9f9 !important;
+    font-family: 'Fredoka One', cursive;
+    text-shadow:  -3px 0px 5px #686565;
+    line-height: 2.4rem;
     top:39.5%;
     left:25%;
     display:flex;
