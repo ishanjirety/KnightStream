@@ -8,23 +8,16 @@ export function Checkbox(props) {
     const {PlaylistState,PlaylistDispatcher} = usePlaylist()
 
     const [CheckedState,setCheckedState] = useState(checked)
-    console.log(checked)
     async function AddToPlaylist(type,event,data){
         if(type === "ADD-TO-PLAYLIST"){
             if(!CheckedState){
-             console.log(event.target.value)
               const response_playlist_add = await axios.post("https://KnightStream.ishanjirety.repl.co/api/playlist/item/add",{name:event.target.value,video:data})
-              console.log(response_playlist_add.data)
               PlaylistDispatcher({type:"ADD-TO-PLAYLIST",payload:{data:data,name:event.target.value}})
               setCheckedState(true)
-              setTimeout(()=>console.log(PlaylistState),2000)
             }
             else if(CheckedState){
-                console.log(event.target.value)
                 const response_playlist_remove = await axios.post("https://KnightStream.ishanjirety.repl.co/api/playlist/item/remove",{name:event.target.value,video:data})
-                console.log(response_playlist_remove)
                 PlaylistDispatcher({type:"REMOVE-FROM-PLAYLIST",payload:{data:data,name:event.target.value}})
-                setTimeout(()=>console.log(PlaylistState),2000)
                 setCheckedState(false)
             }
         }
@@ -32,7 +25,7 @@ export function Checkbox(props) {
 
     return (
         <div>
-            <input type="checkbox" class="checkbox" checked={CheckedState} onClick={(e)=>AddToPlaylist("ADD-TO-PLAYLIST",e,data)} value={name}/>{name}
+            <input type="checkbox" className="checkbox" checked={CheckedState} onChange={(e)=>AddToPlaylist("ADD-TO-PLAYLIST",e,data)} value={name}/>{name}
             </div>
     )
 }

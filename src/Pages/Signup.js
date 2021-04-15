@@ -51,7 +51,7 @@ export function Signup() {
     return (
         <div className="login">
             <div className="login-logo">
-                <span class="login-underline">
+                <span className="login-underline">
                     <p className="login-border">KnightStream</p>
                 </span>
             </div>  
@@ -80,7 +80,7 @@ export function Signup() {
                 <Link to="/login" className="forgot-password signup">Alredy registered? <span className="inverted">Sign in &rarr; </span>
                 </Link>
             </section>
-            <div className={Alertclass} style={{visibility:visibilityErr}}><i class={`fa ${faClass}`}/><p>{content}</p></div>
+            <div className={Alertclass} style={{visibility:visibilityErr}}><i className={`fa ${faClass}`}/><p>{content}</p></div>
         </div>
     )
 }

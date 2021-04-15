@@ -25,12 +25,21 @@ export function PlaylistAction(props) {
         }
     }
     useEffect(()=>{
+
+        (async function fetchPlaylist(){
+            const response_playlist = await axios.get("https://KnightStream.ishanjirety.repl.co/api/playlist")
+            const data = response_playlist.data.playlists
+            PlaylistDispatcher({type:"REFRESH-PLAYLIST",payload:data})
+        })()
         const current = new Date()
         const date = current.getDate()
         const month = current.getMonth() + 1
         const year = current.getFullYear()
         const FINAL_DATE = `${date}-${month}-${year}`
         setDate(FINAL_DATE)
+
+       
+
     },[])
     return (
     <Fragment>
@@ -56,7 +65,7 @@ export function PlaylistAction(props) {
        <div className="save-to-playlist-desktop" style={styles}>
            <div className="playlist-heading">
                 <span className="playlist-heading"><p> Add To Playlist</p>  </span>
-             <button class="close" onClick={()=>state(false)}><img src={close}></img></button>
+             <button className="close" onClick={()=>state(false)}><img src={close}></img></button>
             </div>
             <div className="playlist-items-desktop">
                 {PlaylistState.playlist.map((content)=>{

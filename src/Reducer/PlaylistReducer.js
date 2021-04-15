@@ -1,5 +1,4 @@
 export function PlaylistReducer(state,action){
-    console.log(action)
     switch(action.type){
         case "ADD-PLAYLIST":
             return {...state,count:state.count+1,playlist:[...state.playlist,action.payload]}

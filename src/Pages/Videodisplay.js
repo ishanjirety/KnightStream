@@ -25,8 +25,7 @@ export function Videodisplay() {
     const [notes,setNotes] = useState("")
     const [OpenModal,setOpenModal] = useState(false)
     const [showPlaylist,setShowPlaylist] = useState(false)
-    const[loginModal,setLoginModal] = useState(loggedIn)
-    console.log(loggedIn)
+    const[loginModal,setLoginModal] = useState(false)
 
     useEffect(()=>{
         (async function fetchData(){
@@ -73,7 +72,6 @@ export function Videodisplay() {
     },[liked])
     
    async function SaveHandler(action){
-
     if(loggedIn){
         try{
             switch(action){
@@ -164,7 +162,7 @@ function LoginModal({state}){
                 <p>Oops! you are not logged in</p>
                 <div className="playlist-action-desktop">
                     <button className="login-btn"><Link to="/login" >Login</Link></button>
-                    <button className="login-btn secondary" onClick={()=>state(!state)}>Cancel</button>
+                    <button className="login-btn secondary" onClick={()=>state(false)}>Cancel</button>
                 </div>
             </div>
             

@@ -25,7 +25,6 @@ function App() {
         const token = getToken()
         if(token !== null){
             const response = await axios.post('https://KnightStream.ishanjirety.repl.co/api/searchuser',{token:token.token})  
-            console.log(response.data)
             response.data.status ===200 ?  setLoggedin(true) : setLoggedin(false)
         }
         else{

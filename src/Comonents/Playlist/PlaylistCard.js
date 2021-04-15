@@ -5,7 +5,7 @@ import {usePlaylist} from '../../Context'
 import './Assets/css/PlaylistCard.css'
 import './Assets/css/PlaylistResponsive.css'
 export function Playlistcard(props) {
-    const {data} =props 
+    const {data,keyValue} =props 
     const {name} = data
     
     const {PlaylistDispatcher} = usePlaylist() 
@@ -17,8 +17,8 @@ export function Playlistcard(props) {
     }
 
     return (
-        <Fragment>
-        <div className="playlist-card">
+
+        <div className="playlist-card" key={keyValue}>
             <img className="plalist-thumbnail" src={thumbnail_hq}></img>
             <div className="playlist-info">
                 <Link to={`/playlist/${name}`} className="playlist-text">{name}</Link>
@@ -26,7 +26,6 @@ export function Playlistcard(props) {
              </div>
              <button className="btn-delete" onClick={DeleteHandler}><i className="fa fa-trash"></i></button>
         </div>
-        </Fragment>
     )
 }
 

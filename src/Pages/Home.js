@@ -25,15 +25,15 @@ export function Home() {
                 <ProfileButton/>    
             </div>
             <div className="nav-options">
-                <p>Playlist {PlaylistState.playlist.length !== 0 ? <Link className="nav-options-link" to="/playlist">View More</Link>: <Link className="nav-options-link" to="/explore">Explore</Link> }</p>
+                <p>Playlist {PlaylistState.playlist.length !== 0 ? <Link className="nav-options-link" to="/playlist" >View More</Link>: <Link className="nav-options-link" to="/explore">Explore</Link> }</p>
                 <div className="display-items">
-                {PlaylistState.playlist.length !== 0 ? PlaylistState.playlist.map((item,key)=>key < 3 && <Playlistcard data={item}/>): <p className="empty-heading">No playlist created</p>}
+                {PlaylistState.playlist.length !== 0 ? PlaylistState.playlist.map((item,key)=>key < 3 && <Playlistcard data={item} keyValue={key}/>): <p className="empty-heading">No playlist created</p>}
                 </div>
             </div>
             <div className="nav-options">
                 <p>Liked Videos {likedState.likedvideos.length !==0 ? <Link className="nav-options-link" to="/liked-videos">View More</Link>: <Link className="nav-options-link" to="/explore">Explore</Link> }</p>
                 <div className="display-items liked">
-                    {likedState.likedvideos.length !==0 ? likedState.likedvideos.map((item,key)=>key<3 && <Videodescription data={item}/>) : <p className="empty-heading">No liked videos</p>}
+                    {likedState.likedvideos.length !==0 ? likedState.likedvideos.map((item,key)=>key<3 && <Videodescription data={item} keyValue={key}/>) : <p className="empty-heading">No liked videos</p>}
                 </div>
             </div>
         </div>
