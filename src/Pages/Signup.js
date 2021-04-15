@@ -14,6 +14,7 @@ export function Signup() {
     const [signupContent,setSignupContent] = useState("Sign up")
     async function userSignup(){
         try{
+        if(textInputState.username !== "" && textInputState.password !== "" && textInputState.answer !== ""){
             if(textInputState.password === textInputState.rePassword){
                 setSignupContent("Signing up...")
             const response_signup = await axios.post("https://KnightStream.ishanjirety.repl.co/api/signup",textInputState)
@@ -36,6 +37,13 @@ export function Signup() {
                 setAlertClass("alert danger animate")
                 setFaClass("fa-exclamation")
             }
+        }
+        else{
+                setErrVisibility("visible")
+                setContent("Fields cannot be empty")
+                setAlertClass("alert danger animate")
+                setFaClass("fa-exclamation")
+        }
         }catch(e){
             console.log(e)
             setContent("Uh no! 500 Internal server error")
@@ -45,6 +53,7 @@ export function Signup() {
             setSignupContent("Sign up")
         }
     } 
+
     useEffect(()=>{setTimeout(()=>{
             setAlertClass("alert fade")
             setErrVisibility("hidden")

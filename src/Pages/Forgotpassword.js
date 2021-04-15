@@ -12,6 +12,7 @@ export function Forgotpassword() {
     const [signupContent,setSignupContent] = useState("Reset")
     async function forgotPassword(){
         try{
+            if(textInputState.username !== "" && textInputState.password !== "" && textInputState.answer !== ""){
             if(textInputState.password === textInputState.rePassword){
                 setSignupContent("Resetting...")
             const response_signup = await axios.post("https://KnightStream.ishanjirety.repl.co/api/password/recovery",textInputState)
@@ -35,6 +36,13 @@ export function Forgotpassword() {
                 setAlertClass("alert danger animate")
                 setFaClass("fa-exclamation")
             }
+        }
+        else{
+            setErrVisibility("visible")
+            setContent("Fields cannot be empty")
+            setAlertClass("alert danger animate")
+            setFaClass("fa-exclamation")
+    }
         }catch(e){
             setContent("Uh no! 500 Internal server error")
             setAlertClass("alert danger animate")
