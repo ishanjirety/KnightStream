@@ -77,15 +77,11 @@ export function Videodisplay() {
             switch(action){
                 case "SAVE" :
                     setSaveToggle(true)
-                    const TEXT = notes.replace(/\n/g,"[nl]")
-                    console.log(TEXT)
-                    const response_saved = await axios.post('https://KnightStream.ishanjirety.repl.co/api/save/add',{...FoundVideo,notes:notes})
-                    console.log("SAVED : ",response_saved)
+                     await axios.post('https://KnightStream.ishanjirety.repl.co/api/save/add',{...FoundVideo,notes:notes})
                     savedDispatch({type:"ADD-TO-SAVED",payload:{...FoundVideo,notes:notes}})
                     setTimeout(()=>setSaveToggle(false),2000)
                     break
                 case "DELETE" :
-                console.log(FoundVideo)
                 await axios.post('https://KnightStream.ishanjirety.repl.co/api/save/remove',FoundVideo)
                 savedDispatch({type:"REMOVE-FROM-SAVED",payload:FoundVideo})
                 setSaveToggle(false)

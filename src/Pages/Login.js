@@ -3,7 +3,6 @@ import {Link,useLocation,useNavigate} from 'react-router-dom'
 import './styles.css'
 import {setToken} from '../Token'
 import {useAuth} from '../Context'
-import {Redirect} from '../Comonents'
 import uuid from 'react-uuid'
 import axios from 'axios'
 
@@ -53,11 +52,14 @@ export function Login() {
             if(loggedIn){
                 navigate('/')
             }
+            else{
+                navigate('/login')
+            }
     },[])
     return (
         <div className="login">
             <div className="login-logo">
-                <span class="login-underline">
+                <span className="login-underline">
                     <p className="login-border">KnightStream</p>
                 </span>
             </div>  
@@ -78,7 +80,6 @@ export function Login() {
                 <Link to="/signup" className="forgot-password signup">Not registered yet? <span className="inverted">Register &rarr; </span>
                 </Link>
             </section>
-            {/* <Redirect display={redirect} to={state?.from === "/" ? "home" : state?.from.replace("/","")}/> */}
         </div>
     )
 }

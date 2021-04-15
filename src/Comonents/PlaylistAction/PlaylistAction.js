@@ -37,9 +37,6 @@ export function PlaylistAction(props) {
         const year = current.getFullYear()
         const FINAL_DATE = `${date}-${month}-${year}`
         setDate(FINAL_DATE)
-
-       
-
     },[])
     return (
     <Fragment>
@@ -49,10 +46,11 @@ export function PlaylistAction(props) {
                 <span className="playlist-heading"><p> Add To Playlist</p></span>
             </div>
             <div className="playlist-items">
-                {PlaylistState.playlist.map((content)=>{
+                {PlaylistState.playlist.map((content,key)=>{
                 if(data !== undefined){
-                    return <Checkbox checked={content.videos.filter(video=>video.title === data.title).length > 0 ? true : false} name={content.name} data={data} />
+                    return <Checkbox checked={content.videos.filter(video=>video.title === data.title).length > 0 ? true : false} name={content.name} data={data} keyValue={key}/>
                 }
+                return null
             })}
             </div>
             <div className="playlist-action">
@@ -65,13 +63,14 @@ export function PlaylistAction(props) {
        <div className="save-to-playlist-desktop" style={styles}>
            <div className="playlist-heading">
                 <span className="playlist-heading"><p> Add To Playlist</p>  </span>
-             <button className="close" onClick={()=>state(false)}><img src={close}></img></button>
+             <button className="close" onClick={()=>state(false)}><img src={close} alt=""></img></button>
             </div>
             <div className="playlist-items-desktop">
-                {PlaylistState.playlist.map((content)=>{
+                {PlaylistState.playlist.map((content,key)=>{
                 if(data !== undefined){
-                    return <Checkbox checked={content.videos.filter(video=>video.title === data.title).length > 0 ? true : false} name={content.name} data={data} />
+                    return <Checkbox checked={content.videos.filter(video=>video.title === data.title).length > 0 ? true : false} name={content.name} data={data} keyValue={key} />
                 }
+                return null
             })}
             </div>
             <div className="playlist-action-desktop">

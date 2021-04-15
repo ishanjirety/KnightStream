@@ -1,7 +1,7 @@
-import React,{useReducer,useState,useEffect} from 'react'
+import React,{useReducer,useState} from 'react'
 import axios from 'axios'
 import account from '../Common-Assets/Account.svg'
-import {Toast,Redirect} from '../Comonents'
+import {Redirect} from '../Comonents'
 import {useAuth} from '../Context'
 
 import {removeToken} from '../Token'
@@ -72,12 +72,12 @@ export function Account() {
                    <input  className="input" required onChange={(e)=>inputDispatcher({type:"RE-PASSWORD",payload:e.target.value})}/><label>Re-Enter Password</label>
                 </div>
                 <div className="input-fields account-field">    
-                { <p className="error-login account-error" style={{color:error && inputState.rePassword !== "" && checkPassword()? "red" : "transparent" ,color:!error && "green"}}>{errorContent}</p> }   
+                { <p className="error-login account-error" style={{color:error && inputState.rePassword !== "" && checkPassword() ? "red" : "transparent" ,color:!error && "green"}}>{errorContent}</p> }   
                 </div>
                 <button className="login-btn" type="submit" onClick={UpdateHandler}>Update</button>
-
             </div>
-    <Redirect display={redirection} to="login"/>
+
+            <Redirect display={redirection} to="login"/>
         </div>
         
     )

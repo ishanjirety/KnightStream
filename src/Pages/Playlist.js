@@ -38,7 +38,7 @@ export function Playlist(props) {
                 <div className="card-wrapper">
                     <ul className="list-playlist">
                     {PlaylistState.playlist.length > 0 ? PlaylistState.playlist.map((item,key)=>{
-                        return <li className="list-item-inline"><Playlistcard source="https://i.ytimg.com/vi/KGMEhdaZ6ZY/maxresdefault.jpg" text={item.name} data={item} keyValue={key}/></li>
+                        return <li className="list-item-inline" key={key}><Playlistcard source="https://i.ytimg.com/vi/KGMEhdaZ6ZY/maxresdefault.jpg" text={item.name} data={item} keyValue={key}/></li>
                        
                     }): <p className="empty-heading">No playlist created</p>}
                     </ul>

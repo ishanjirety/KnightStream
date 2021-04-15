@@ -7,7 +7,7 @@ export function NotFound() {
     return (
         <div className="error">
             <p className="error-description">ERROR</p>
-           <span className="error-text">4</span> <img src={errorImg} className="error-img"></img><span className="error-text">4</span>
+           <span className="error-text">4</span> <img src={errorImg} alt="" className="error-img"></img><span className="error-text">4</span>
            <p className="error-description">Oops! the page you are looking for is not available! </p>
         </div>
     )

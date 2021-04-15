@@ -42,7 +42,7 @@ export function Explore() {
                 
                 <div className="heading search">
                 <ProfileButton/>    
-                <p><img src={search_white} alt="Explore"/> Explore</p>
+                <p><img src={search_white} alt="Explore"/>Explore</p>
                     <div className="search-bar">
                     <img src={search} className="search-icon" alt="search"/>
                     <input className="search-input" onChange={onChangeHandler} placeholder="Search"></input>

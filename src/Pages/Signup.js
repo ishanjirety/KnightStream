@@ -1,6 +1,7 @@
 import React,{useReducer,useState,useEffect} from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+
 export function Signup() {
     const [textInputState,textInputDispatcher] = useReducer(inputDispatcher,{username:"",password:"",rePassword:"",answer:""})
     
@@ -16,7 +17,6 @@ export function Signup() {
             if(textInputState.password === textInputState.rePassword){
                 setSignupContent("Signing up...")
             const response_signup = await axios.post("https://KnightStream.ishanjirety.repl.co/api/signup",textInputState)
-            console.log(response_signup.data)
             if(response_signup.data.status===200){
                 setContent("User created successfully")
                 setAlertClass("alert animate")
@@ -42,12 +42,14 @@ export function Signup() {
             setAlertClass("alert danger animate")
             setErrVisibility("visible")
             setFaClass("fa-exclamation")
+            setSignupContent("Sign up")
         }
     } 
     useEffect(()=>{setTimeout(()=>{
-        setAlertClass("alert fade")
-        setErrVisibility("hidden")
-    },4000)},[visibilityErr])
+            setAlertClass("alert fade")
+            setErrVisibility("hidden")
+        },4000)
+    },[visibilityErr])
     return (
         <div className="login">
             <div className="login-logo">
@@ -96,6 +98,8 @@ function inputDispatcher(state,action){
             return {...state,rePassword:action.payload}
         case "ADD-ANSWER":
             return {...state,answer:action.payload}
+        default : 
+            return state
     }
 }
 

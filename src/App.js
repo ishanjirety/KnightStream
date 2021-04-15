@@ -6,7 +6,7 @@ import {Protected} from './ProtectedRoute'
 import {useAuth} from './Context'
 import {getToken} from './Token' 
 
-import {Redirect,Nav,Splashscreen} from './Comonents'
+import {Nav,Splashscreen} from './Comonents'
 import {Login,Playlist,Explore,Videodisplay,Liked,Home,NotFound404,PlaylistDisplay,Account,Signup,Forgotpassword} from './Pages'
 import {Routes,Route} from 'react-router-dom'
 
@@ -18,7 +18,7 @@ function App() {
   // Set Splashscreen Anmation & Visibility
   const [splashScreen,setSplashscreen] = useState("")
   const [SplashscreenDisplay,setSplashscreenDisplay] = useState(true)
-  const {loggedIn,setLoggedin} = useAuth()
+  const {setLoggedin} = useAuth()
 
   useEffect(()=>{
     (async function setData(){
@@ -45,8 +45,8 @@ function App() {
     <div className="App">
       <Nav/>
       <Routes>
-        <Protected path="/" element={<Home/>}/>
-        <Route path="/explore" element={<Explore/>}/>
+        <Route path="/" element={<Explore/>}/>
+        <Protected path="/home" element={<Home />}/>
         <Route path="/video/:videoId" element={<Videodisplay/>}/>
         <Protected path="/liked-videos" element={<Liked/>}/>
         <Protected path="/playlist" element={<Playlist/>}/>
@@ -59,6 +59,8 @@ function App() {
 
       </Routes>
       {SplashscreenDisplay && <Splashscreen animation ={splashScreen}/>}
+    
+      
 
       
     </div>
