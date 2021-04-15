@@ -24,7 +24,7 @@ function App() {
     (async function setData(){
         const token = getToken()
         if(token !== null){
-            const response = await axios.post('http://127.0.0.1:4444/api/searchuser',{token:token.token})  
+            const response = await axios.post('https://KnightStream.ishanjirety.repl.co/api/searchuser',{token:token.token})  
             console.log(response.data)
             response.data.status ===200 ?  setLoggedin(true) : setLoggedin(false)
         }

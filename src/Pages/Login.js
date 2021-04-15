@@ -31,7 +31,6 @@ export function Login() {
                 const response=await axios.post('https://KnightStream.ishanjirety.repl.co/api/upDatetoken',{username:username,token:ID})
                 const status = response.data.status
                 status === 200 && setToken(ID,true)
-                console.log("HERE")
                 setLoggedin(true)
                 setLoginText("Sign in")
                 navigate(state?.from ? state.from : "/")
