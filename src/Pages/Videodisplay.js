@@ -16,7 +16,7 @@ export function Videodisplay() {
     const {likedDispatch} = useLike()
     const {savedDispatch} = useSaved()
     const{PlaylistDispatcher}=usePlaylist()
-    const {isLoggedin} = useAuth()
+    const {loggedIn} = useAuth()
     const {videoId} = useParams()
 
     const [FoundVideo,setFoundVideo] = useState()
@@ -25,7 +25,8 @@ export function Videodisplay() {
     const [notes,setNotes] = useState("")
     const [OpenModal,setOpenModal] = useState(false)
     const [showPlaylist,setShowPlaylist] = useState(false)
-    const[loginModal,setLoginModal] = useState(true)
+    const[loginModal,setLoginModal] = useState(loggedIn)
+    console.log(loggedIn)
 
     useEffect(()=>{
         (async function fetchData(){
@@ -73,7 +74,7 @@ export function Videodisplay() {
     
    async function SaveHandler(action){
 
-    if(isLoggedin){
+    if(loggedIn){
         try{
             switch(action){
                 case "SAVE" :
@@ -115,8 +116,8 @@ export function Videodisplay() {
             <div className="description">
                 <p className="video-title">{FoundVideo.title}</p>
                 <div className="video-action-buttons">
-                    <span className="checkbox-span"><input type="checkbox" className="btn-video-action fa fa-heart" onChange={()=> isLoggedin ? liked==="UNLIKED" || liked==="" ? setLiked("LIKED") : setLiked("UNLIKED") : setLoginModal(true)} checked={liked === "LIKED" ? true : false}></input></span>
-                    <button className="btn-video-action svg-btn" onClick={()=>isLoggedin ? setShowPlaylist(!showPlaylist): setLoginModal(true) }><img alt="playlist" className="action-icon" src={playlist}></img></button>                  
+                    <span className="checkbox-span"><input type="checkbox" className="btn-video-action fa fa-heart" onChange={()=> loggedIn ? liked==="UNLIKED" || liked==="" ? setLiked("LIKED") : setLiked("UNLIKED") : setLoginModal(true)} checked={liked === "LIKED" ? true : false}></input></span>
+                    <button className="btn-video-action svg-btn" onClick={()=>loggedIn ? setShowPlaylist(!showPlaylist): setLoginModal(true) }><img alt="playlist" className="action-icon" src={playlist}></img></button>                  
                     
                     {/* <PlaylistAction/> */}
                 </div>
