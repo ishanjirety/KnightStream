@@ -70,10 +70,10 @@ export function Account() {
                    <input  className="input" required onChange={(e)=>inputDispatcher({type:"USERNAME",payload:e.target.value})}/><label>Username</label>
                 </div>
                 <div className="input-fields">    
-                   <input  className="input" required onChange={(e)=>inputDispatcher({type:"PASSWORD",payload:e.target.value})}/><label>Password</label>
+                   <input  className="input" required onChange={(e)=>inputDispatcher({type:"PASSWORD",payload:e.target.value})} type="password"/><label>Password</label>
                 </div>
                 <div className="input-fields">    
-                   <input  className="input" required onChange={(e)=>inputDispatcher({type:"RE-PASSWORD",payload:e.target.value})}/><label>Re-Enter Password</label>
+                   <input  className="input" required onChange={(e)=>inputDispatcher({type:"RE-PASSWORD",payload:e.target.value})} type="password"/><label>Re-Enter Password</label>
                 </div>
                 <div className="input-fields account-field">    
                 { <p className="error-login account-error" style={{color:error && inputState.rePassword !== "" && checkPassword()? "red" : "transparent" ,color:!error && "green"}}>{errorContent}</p> }   
