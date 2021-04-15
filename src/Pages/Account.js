@@ -25,6 +25,10 @@ export function Account() {
                 setError(true) 
                 setErrorContent("Username not found")
             }
+            else{
+                setError(false) 
+                setErrorContent("Password updated")
+            }
         }else{
             setErrorContent("Password does not match")
             setError(true)
@@ -72,12 +76,12 @@ export function Account() {
                    <input  className="input" required onChange={(e)=>inputDispatcher({type:"RE-PASSWORD",payload:e.target.value})}/><label>Re-Enter Password</label>
                 </div>
                 <div className="input-fields account-field">    
-                { <p className="error-login account-error" style={{color:error && inputState.rePassword !== "" && checkPassword() ? "red" : "transparent" ,color:!error && "green"}}>{errorContent}</p> }   
+                { <p className="error-login account-error" style={{color:error && inputState.rePassword !== "" && checkPassword()? "red" : "transparent" ,color:!error && "green"}}>{errorContent}</p> }   
                 </div>
                 <button className="login-btn" type="submit" onClick={UpdateHandler}>Update</button>
-            </div>
 
-            <Redirect display={redirection} to="login"/>
+            </div>
+    <Redirect display={redirection} to="login"/>
         </div>
         
     )
