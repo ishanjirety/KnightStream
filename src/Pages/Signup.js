@@ -45,7 +45,6 @@ export function Signup() {
                 setFaClass("fa-exclamation")
         }
         }catch(e){
-            console.log(e)
             setContent("Uh no! 500 Internal server error")
             setAlertClass("alert danger animate")
             setErrVisibility("visible")

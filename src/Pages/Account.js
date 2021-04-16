@@ -19,7 +19,6 @@ export function Account() {
     async function UpdateHandler(){
         if(checkPassword()){
             const response = await axios.post('https://KnightStream.ishanjirety.repl.co/api/users/update',{username:inputState.username,password:inputState.password})
-            console.log(response.data.status)
             const status = response.data.status
             if(status !== 200) {
                 setError(true) 
