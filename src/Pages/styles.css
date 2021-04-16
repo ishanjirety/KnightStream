@@ -459,6 +459,7 @@ label{
     border-bottom: 2px solid var(--search-rgb);
     color:white;
     padding:0;
+    z-index: var(--index-5);
 }
 input:focus ~ label,
 input:valid ~ label{
