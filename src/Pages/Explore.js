@@ -51,7 +51,7 @@ export function Explore() {
             <div className="card-wrapper">
                 <div className="video-home">
                 {video.map((data,key)=>{
-                    return <Videodescription data={data} keyValue={key}/>
+                    return <Videodescription data={data} key={key} keyValue={key}/>
                     })
                 }
                 </div>

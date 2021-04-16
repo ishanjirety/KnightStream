@@ -48,7 +48,7 @@ export function PlaylistAction(props) {
             <div className="playlist-items">
                 {PlaylistState.playlist.map((content,key)=>{
                 if(data !== undefined){
-                    return <Checkbox checked={content.videos.filter(video=>video.title === data.title).length > 0 ? true : false} name={content.name} data={data} keyValue={key}/>
+                    return <Checkbox checked={content.videos.filter(video=>video.title === data.title).length > 0 ? true : false} name={content.name} data={data} key={key} keyValue={key}/>
                 }
                 return null
             })}
@@ -68,7 +68,7 @@ export function PlaylistAction(props) {
             <div className="playlist-items-desktop">
                 {PlaylistState.playlist.map((content,key)=>{
                 if(data !== undefined){
-                    return <Checkbox checked={content.videos.filter(video=>video.title === data.title).length > 0 ? true : false} name={content.name} data={data} keyValue={key} />
+                    return <Checkbox checked={content.videos.filter(video=>video.title === data.title).length > 0 ? true : false} name={content.name} data={data} key={key} keyValue={key} />
                 }
                 return null
             })}

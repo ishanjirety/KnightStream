@@ -37,8 +37,8 @@ export function Liked(props) {
             </div>
                 <div className="card-wrapper">
                     <div className="video-home">
-                    {likedState.likedvideos.length>0 ? likedState.likedvideos.map((item)=>{
-                    return <Videodescription data={item}/>
+                    {likedState.likedvideos.length>0 ? likedState.likedvideos.map((item,key)=>{
+                    return <Videodescription key={key} keyValue={key} data={item}/>
                     }): <p className="empty-heading">No liked videos</p>}
                     </div>
                 </div>

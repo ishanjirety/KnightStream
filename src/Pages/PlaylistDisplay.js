@@ -11,28 +11,24 @@ import playlist from '../Common-Assets/Playlist.svg'
 import './styles.css'
 import './Responsive-pages.css'
 
-export function PlaylistDisplay(props) {
+export function PlaylistDisplay(){
     const {PlaylistState} = usePlaylist()
     const [Foundplaylist,setFoundPlaylist] = useState()
     const {playlistId} = useParams()
     useEffect(()=>{
-        console.log(PlaylistState)
         const PLAYLIST = PlaylistState.playlist.find(playlist=> playlist.name === playlistId )
         setFoundPlaylist(PLAYLIST)
-        console.log(PLAYLIST)
     },[])
-    console.log(playlistId)
     return (
         <div className="main-body">
-            {console.log(Foundplaylist)}
             <div className="heading">
                 <img src={playlist} alt="Playlist"/>{playlistId}
                 <ProfileButton/>    
             </div>
                 <div className="card-wrapper">
                     <ul className="list-playlist">
-                    {Foundplaylist !== undefined && Foundplaylist.videos.map((item)=>{
-                        return <li className="list-item-inline"><Videodescription data={item}/></li>
+                    {Foundplaylist !== undefined && Foundplaylist.videos.map((item,key)=>{
+                        return <li className="list-item-inline" key={key}><Videodescription data={item}/></li>
                        
                     })}
                     </ul>
