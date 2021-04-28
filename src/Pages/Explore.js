@@ -10,17 +10,21 @@ import {useVideo} from '../Context'
 // @desc importing components
 import {Videodescription,ProfileButton} from '../Comonents'
 
+import {getToken} from '../Token'
+
 // @desc importing styles
 import './styles.css'
 import './Responsive-pages.css'
 
-let savedVideoListt = ""
+let savedVideoListt = "" //Backup
 export function Explore() {
     
     const {setVideo,video} = useVideo()
+    const token = getToken() !==null ? getToken() : {token:null}
+
     useEffect(()=>{
         (async function fetchData(){
-       const response_videolist = await axios.get('https://KnightStream.ishanjirety.repl.co/api/videolist')
+       const response_videolist = await axios.get(`https://KnightStream.ishanjirety.repl.co/api/videolist?token=${token.token}`)
        const video_list = response_videolist.data.videos
        savedVideoListt = video_list
        setVideo(video_list)
@@ -32,11 +36,12 @@ export function Explore() {
             setVideo((item)=>item.filter((video)=>video.title.toLowerCase().includes(e.toLowerCase())))
             }
         }
-
+        // {},{},{},{}
+        //m * 2
         function onChangeHandler(e){
                 setVideo(savedVideoListt)
-                onEnterPress(e.target.value) //
-        }
+                onEnterPress(e.target.value)
+            }
     return (
             <div className="main-body">
                 

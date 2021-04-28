@@ -11,6 +11,8 @@ import {useLike,useSaved,usePlaylist,useAuth} from '../Context'
 // @desc common assets
 import playlist from '../Common-Assets/Playlist.svg'
 
+import {getToken} from '../Token'
+
 
 export function Videodisplay() {
     const {likedDispatch} = useLike()
@@ -27,26 +29,32 @@ export function Videodisplay() {
     const [showPlaylist,setShowPlaylist] = useState(false)
     const[loginModal,setLoginModal] = useState(false)
 
+    const token = getToken() !==null ? getToken() : {token:null}
+    
+
     useEffect(()=>{
         (async function fetchData(){
+
         // Finding Video From URL Param
         const response_videolist = await axios.get('https://KnightStream.ishanjirety.repl.co/api/videolist')
         const video_list = await response_videolist.data.videos
+        console.log(video_list.isLiked);
         const video = await video_list.find((item)=>item.id===videoId)
         setFoundVideo(video)
         video.isLiked ? setLiked("LIKED") : setLiked("UNLIKED")
 
         // Getting Saved List
-        const response_saved = await axios.get("https://KnightStream.ishanjirety.repl.co/api/saved")
+        const response_saved = await axios.get(`https://KnightStream.ishanjirety.repl.co/api/saved/${token.token}`)
+        console.log(response_saved)
         const parsed_video = await response_saved.data.saved.savedvideos
 
         if(parsed_video !== undefined && parsed_video.length !== 0){
         const saved_video = await parsed_video.find((item)=>item.id===videoId)
-        saved_video !== undefined ? setNotes(saved_video.notes) :setNotes("")
+        saved_video !== undefined ? setNotes(saved_video.notes) : setNotes("")
         }
 
         // Fetching Playlists
-        const response_playlist = await axios.get("https://KnightStream.ishanjirety.repl.co/api/playlist")
+        const response_playlist = await axios.get(`https://KnightStream.ishanjirety.repl.co/api/playlist/${token.token}`)
         const playlist = response_playlist.data.playlists
         PlaylistDispatcher({type:"REFRESH-PLAYLIST",payload:playlist})
     })()
@@ -70,19 +78,19 @@ export function Videodisplay() {
     }
 })()
     },[liked])
-    
+
    async function SaveHandler(action){
     if(loggedIn){
         try{
             switch(action){
                 case "SAVE" :
                     setSaveToggle(true)
-                     await axios.post('https://KnightStream.ishanjirety.repl.co/api/save/add',{...FoundVideo,notes:notes})
+                     await axios.post(`https://KnightStream.ishanjirety.repl.co/api/saved/add/${token.token}`,{...FoundVideo,notes:notes})
                     savedDispatch({type:"ADD-TO-SAVED",payload:{...FoundVideo,notes:notes}})
                     setTimeout(()=>setSaveToggle(false),2000)
                     break
                 case "DELETE" :
-                await axios.post('https://KnightStream.ishanjirety.repl.co/api/save/remove',FoundVideo)
+                await axios.post(`https://KnightStream.ishanjirety.repl.co/api/saved/remove/${token.token}`,FoundVideo)
                 savedDispatch({type:"REMOVE-FROM-SAVED",payload:FoundVideo})
                 setSaveToggle(false)
                 setOpenModal(false)

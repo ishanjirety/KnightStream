@@ -9,24 +9,26 @@ import {Checkbox} from '../Checkbox/Checkbox'
 
 import {usePlaylist} from '../../Context'
 
+import {getToken} from '../../Token'
+
 export function PlaylistAction(props) {
     const {styles,data,display,state} = props
     const {PlaylistState,PlaylistDispatcher} = usePlaylist()
     const [playlistName,setPlaylistName] = useState("")
     const [date,setDate] = useState()
-
+    const {token} = getToken()
     
     async function AddPlaylist(){
         if(playlistName !== ""){
-            const response_playlist = await axios.post("https://KnightStream.ishanjirety.repl.co/api/playlist/add", {name:playlistName,count:0,videos:[],date:date} )
+            const response_playlist = await axios.post(`https://KnightStream.ishanjirety.repl.co/api/playlist/add/${token}`, {name:playlistName,count:0,videos:[],date:date} )
+            console.log(response_playlist)
             PlaylistDispatcher({type:"ADD-PLAYLIST",payload:{name:playlistName,count:0,videos:[]}})
             setPlaylistName("")
         }
     }
     useEffect(()=>{
-
         (async function fetchPlaylist(){
-            const response_playlist = await axios.get("https://KnightStream.ishanjirety.repl.co/api/playlist")
+            const response_playlist = await axios.get(`https://KnightStream.ishanjirety.repl.co/api/playlist/${token}`)
             const data = response_playlist.data.playlists
             PlaylistDispatcher({type:"REFRESH-PLAYLIST",payload:data})
         })()

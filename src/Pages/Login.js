@@ -23,25 +23,21 @@ export function Login() {
         try{
             setLoginText("Signing in...")
             const response_login=await axios.post('https://KnightStream.ishanjirety.repl.co/api/login',{username:username,password:password})
-            const result = response_login.data.status
-            result===401 ? setError(true) : setError(false)
-            if(result===200){
+            const {_id} = response_login.data.user
+            console.log(response_login.data)
+                setError(false)
                 const ID = uuid()
-                const response=await axios.post('https://KnightStream.ishanjirety.repl.co/api/upDatetoken',{username:username,token:ID})
+                const response=await axios.post('https://KnightStream.ishanjirety.repl.co/api/upDatetoken',{_id:_id,token:ID})
                 const status = response.data.status
                 status === 200 && setToken(ID,true)
                 setLoggedin(true)
                 setLoginText("Sign in")
                 navigate(state?.from ? state.from : "/")
-            }   
-            else{
-                setError(true)
-                setErrorContent("Invalid Credentials")
-                setLoginText("Sign in")
-            }
     }
         catch(e){
-            console.log(e)
+            setError(true)
+            setErrorContent("Invalid Credentials")
+            setLoginText("Sign in")
         }
     }
     else{
