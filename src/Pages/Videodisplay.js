@@ -36,7 +36,7 @@ export function Videodisplay() {
         (async function fetchData(){
 
         // Finding Video From URL Param
-        const response_videolist = await axios.get('https://KnightStream.ishanjirety.repl.co/api/videolist')
+        const response_videolist = await axios.get(`https://KnightStream.ishanjirety.repl.co/api/videolist?token=${token.token}`)
         const video_list = await response_videolist.data.videos
         console.log(video_list.isLiked);
         const video = await video_list.find((item)=>item.id===videoId)
@@ -64,19 +64,19 @@ export function Videodisplay() {
     (async function fetchData(){
         try{
         if(liked==="LIKED"){
-            await axios.post('https://KnightStream.ishanjirety.repl.co/api/liked/add',FoundVideo)
+            await axios.post(`https://KnightStream.ishanjirety.repl.co/api/liked/add/${token.token}`,FoundVideo)
             likedDispatch({type:"ADD-TO-LIKED",payload:FoundVideo})
             setLiked("LIKED") 
         }
         if(liked==="UNLIKED"){
-            await axios.post('https://KnightStream.ishanjirety.repl.co/api/liked/remove',FoundVideo)
+            await axios.delete(`https://KnightStream.ishanjirety.repl.co/api/liked/remove/${token.token}`,{data:{video:FoundVideo}})
             likedDispatch({type:"REMOVE-FROM-LIKED",payload:FoundVideo})
             setLiked("UNLIKED")
         }
     }catch(e){
         console.error("ERROR : COULD NOT LIKE ",e)
     }
-})()
+    })()
     },[liked])
 
    async function SaveHandler(action){
@@ -99,7 +99,6 @@ export function Videodisplay() {
                 default:
                     return
             }
-            
             }
             catch(e){
                 console.error("ERROR : COULD NOT SAVE", e)
@@ -120,8 +119,6 @@ export function Videodisplay() {
                 <div className="video-action-buttons">
                     <span className="checkbox-span"><input type="checkbox" className="btn-video-action fa fa-heart" onChange={()=> loggedIn ? liked==="UNLIKED" || liked==="" ? setLiked("LIKED") : setLiked("UNLIKED") : setLoginModal(true)} checked={liked === "LIKED" ? true : false}></input></span>
                     <button className="btn-video-action svg-btn" onClick={()=>loggedIn ? setShowPlaylist(!showPlaylist): setLoginModal(true) }><img alt="playlist" className="action-icon" src={playlist}></img></button>                  
-                    
-                    {/* <PlaylistAction/> */}
                 </div>
             </div>
            }

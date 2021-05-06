@@ -12,9 +12,6 @@ import {Routes,Route} from 'react-router-dom'
 
 function App() {
   
-  // Custom Hook
-  // const {route} =useRoute()
-
   // Set Splashscreen Anmation & Visibility
   const [splashScreen,setSplashscreen] = useState("")
   const [SplashscreenDisplay,setSplashscreenDisplay] = useState(true)
@@ -59,10 +56,6 @@ function App() {
 
       </Routes>
       {SplashscreenDisplay && <Splashscreen animation ={splashScreen}/>}
-    
-      
-
-      
     </div>
   );
 }

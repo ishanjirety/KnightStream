@@ -7,19 +7,22 @@ import {useToast,useLike} from '../Context'
 
 import Like from '../Common-Assets/Like.svg'
 
+import { getToken } from '../Token'
+
 import './styles.css'
 import './Responsive-pages.css'
 
-export function Liked(props) {
+export function Liked() {
 
     const {setToastContent,setToast,toast} = useToast()
 
     const {likedState,likedDispatch} = useLike()
+    const { token } = getToken()
 
     useEffect(()=>{
         (async function fetchData(){
         try{
-        const response_liked = await axios.get('https://KnightStream.ishanjirety.repl.co/api/liked')
+        const response_liked = await axios.get(`https://KnightStream.ishanjirety.repl.co/api/liked/${token}`)
         const Liked = response_liked.data.liked   
         likedDispatch({type:"REFRESH-LIKED",payload:Liked})
         }

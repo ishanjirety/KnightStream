@@ -1,10 +1,11 @@
 import React,{useReducer,useState,useEffect} from 'react'
 import axios from 'axios'
-import {Link} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
 
 export function Signup() {
+    const navigate = useNavigate()
+
     const [textInputState,textInputDispatcher] = useReducer(inputDispatcher,{username:"",password:"",rePassword:"",answer:""})
-    
     
     const [visibilityErr,setErrVisibility] = useState("hidden")
     const [Alertclass,setAlertClass] = useState("alert")
@@ -24,6 +25,7 @@ export function Signup() {
                 setErrVisibility("visible")
                 setFaClass("fa-check-circle-o")
                 setSignupContent("Sign up")
+                navigate('/login')
             }
             else{
                 setContent("Could not create user")
