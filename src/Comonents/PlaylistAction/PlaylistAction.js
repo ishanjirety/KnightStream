@@ -16,11 +16,11 @@ export function PlaylistAction(props) {
     const {PlaylistState,PlaylistDispatcher} = usePlaylist()
     const [playlistName,setPlaylistName] = useState("")
     const [date,setDate] = useState()
-    const {token} = getToken()
+    const {token} = getToken() ? getToken() : {token:null}
     
     async function AddPlaylist(){
         if(playlistName !== ""){
-            const response_playlist = await axios.post(`https://KnightStream.ishanjirety.repl.co/api/playlist/add/${token}`, {name:playlistName,count:0,videos:[],date:date} )
+            const response_playlist = await axios.post(`https://KnightStream.ishanjirety.repl.co/api/playlist/add`, {name:playlistName,count:0,videos:[],date:date},{headers:{authorization:token}} )
             console.log(response_playlist)
             PlaylistDispatcher({type:"ADD-PLAYLIST",payload:{name:playlistName,count:0,videos:[]}})
             setPlaylistName("")
@@ -28,7 +28,7 @@ export function PlaylistAction(props) {
     }
     useEffect(()=>{
         (async function fetchPlaylist(){
-            const response_playlist = await axios.get(`https://KnightStream.ishanjirety.repl.co/api/playlist/${token}`)
+            const response_playlist = await axios.get(`https://KnightStream.ishanjirety.repl.co/api/playlist`,{headers:{authorization:token}})
             const data = response_playlist.data.playlists
             PlaylistDispatcher({type:"REFRESH-PLAYLIST",payload:data})
         })()

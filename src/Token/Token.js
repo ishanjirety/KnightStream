@@ -6,5 +6,6 @@ export function getToken(){
     return key
 }
 export function removeToken(){
+    console.log('here')
     localStorage.removeItem("isLoggedin")
 }

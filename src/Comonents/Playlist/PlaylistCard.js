@@ -10,12 +10,12 @@ export function Playlistcard(props) {
     const {data,keyValue} =props 
     const {name} = data
     console.log(name)
-    const {token} = getToken()
+    const {token} = getToken() ? getToken() : {token:null}
     const {PlaylistDispatcher} = usePlaylist() 
     const thumbnail_hq = data.videos[0] !== undefined ? "https://img.youtube.com/vi/"+data.videos[0].id+"/mqdefault.jpg" : "https://images.wallpaperscraft.com/image/chess_figures_horse_black_white_8790_1366x768.jpg"
 
     async function DeleteHandler(){
-        await axios.delete(`https://KnightStream.ishanjirety.repl.co/api/playlist/remove/${token}`,{data:{name:name}})
+        await axios.delete(`https://KnightStream.ishanjirety.repl.co/api/playlist/remove`,{data:{name:name},headers:{authorization:token}},{headers:{authorization:token}})
         PlaylistDispatcher({type:"REMOVE-PLAYLIST",payload:{name:name}})
     }
 

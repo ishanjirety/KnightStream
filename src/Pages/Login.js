@@ -23,13 +23,10 @@ export function Login() {
         try{
             setLoginText("Signing in...")
             const response_login=await axios.post('https://KnightStream.ishanjirety.repl.co/api/login',{username:username,password:password})
-            const {_id} = response_login.data.user
+            const {token} = response_login.data
             console.log(response_login.data)
                 setError(false)
-                const ID = uuid()
-                const response=await axios.post('https://KnightStream.ishanjirety.repl.co/api/upDatetoken',{_id:_id,token:ID})
-                const status = response.data.status
-                status === 200 && setToken(ID,true)
+                setToken(token,true)
                 setLoggedin(true)
                 setLoginText("Sign in")
                 navigate(state?.from ? state.from : "/")

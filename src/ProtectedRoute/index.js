@@ -1,1 +1,1 @@
-export  {Protected} from './Protected'
+export { Protected } from './Protected'
