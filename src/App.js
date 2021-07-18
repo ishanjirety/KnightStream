@@ -35,6 +35,7 @@ function App() {
           setLoggedin(false)
         }
         }catch(e){
+          console.log(e)
           if(axios.isAxiosError(e)){
             if(e.response.status === 401){
               removeToken()
