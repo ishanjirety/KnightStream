@@ -1,11 +1,10 @@
 import React from 'react'
-import './Videocard.css'
-export function Videocard() {
+import './Assets/css/Videocard.css'
+export function Videocard(props) {
+    const {id} = props
+    const url = `https://www.youtube.com/embed/${id}`
     return (
-        <div className="video-card">
-            <iframe src="https://www.youtube.com/embed/Vr4MfMlKbnI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen className="video"></iframe>
-            <div className="video-heading"></div>
-        </div>
+        <iframe width="100%" height="150%" src={url} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
     )
 }
 

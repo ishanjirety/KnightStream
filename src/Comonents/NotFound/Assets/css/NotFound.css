@@ -1,0 +1,28 @@
+
+.error-text{
+    color:#fff;
+    font-size: 7rem;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+.error-img{
+    width:5rem;
+    animation:ghost  2s alternate infinite linear;
+    position: relative;
+}
+.error-description{
+    color:white;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+@keyframes ghost{
+    from {
+        top:-1.3rem
+    }
+    to{
+        top:1.1rem
+    }
+}
+/* @media only screen and (min-width: 768px){
+    .error{
+        transform:translatey(10rem)
+    }
+} */

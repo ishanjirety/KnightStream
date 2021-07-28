@@ -1,27 +1,94 @@
-import React,{useState} from 'react'
+import React, { Fragment } from 'react'
+import { NavLink } from 'react-router-dom'
 
-
-import Close from './Assets/images/Close.svg'
 import home from './Assets/images/Home.svg'
-import homeF from './Assets/images/Home-f.svg'
 import like from './Assets/images/Like.svg'
-import likeF from './Assets/images/Like-f.svg'
 import playlist from './Assets/images/Playlist.svg'
 import search from './Assets/images/Search.svg'
+import account from '../../Common-Assets/Account.svg'
+import login from '../../Common-Assets/Login.svg'
 
+import { useAuth } from '../../Context'
 
-import './Nav.css'
+import './Assets/css/Nav.css'
+import './Assets/css/Responsive.css'
+
 export function Nav() {
-    const [hamburger,setHamburger] = useState(false)
+    // const {setRoute} = useRoute()
+    const { loggedIn } = useAuth()
     return (
-        <div className="nav">
-            <ul className="list">
-                <li className="list-item-inline"><button onClick={()=>setHamburger(!hamburger)} className="nav-btn"><img src={home}></img></button> <span className="btn-description">Home</span></li>
-                <li className="list-item-inline"><button onClick={()=>setHamburger(!hamburger)} className="nav-btn"><img src={search}></img></button><span className="btn-description">Search</span></li>
-                <li className="list-item-inline"><button onClick={()=>setHamburger(!hamburger)} className="nav-btn"><img src={like}></img></button> <span className="btn-description">Liked Videos</span></li>
-                <li className="list-item-inline"><button onClick={()=>setHamburger(!hamburger)} className="nav-btn extra"><img src={playlist}></img></button><span className="btn-description">Playlist</span></li>
-            </ul>
-        </div>
+        <Fragment>
+            <nav className="nav">
+                <ul className="list">
+                    <li className="list-item-inline">
+                        <NavLink to="/home" className="nav-btn">
+                            <img src={home} alt=""></img>
+                        </NavLink> <span className="btn-description">Home</span>
+                    </li>
+                    <li className="list-item-inline">
+                        <NavLink to="/" className="nav-btn">
+                            <img src={search} alt=""></img>
+                        </NavLink> <span className="btn-description">Search</span>
+                    </li>
+                    <li className="list-item-inline">
+                        <NavLink to="/liked-videos" className="nav-btn">
+                            <img src={like} alt=""></img>
+                        </NavLink> <span className="btn-description">Liked Videos</span>
+                    </li>
+                    <li className="list-item-inline">
+                        <NavLink to="/playlist" className="nav-btn">
+                            <img src={playlist} alt=""></img>
+                        </NavLink> <span className="btn-description">Playlist</span>
+                    </li>
+                </ul>
+            </nav>
+            <nav className="sidebar">
+                <ul className="list sidebar-list">
+
+                    <NavLink to="/home" className="nav-btn sidebar-btn">
+                        <li className="list-item-inline sidebar-list-item">
+                            <img src={home} alt=""></img>
+                            <span className="btn-description">Home</span>
+                        </li>
+                    </NavLink>
+
+
+                    <NavLink to="/" className="nav-btn sidebar-btn">
+                        <li className="list-item-inline sidebar-list-item" >
+                            <img src={search} alt=""></img><span className="btn-description">Search</span>
+                        </li>
+                    </NavLink>
+
+
+                    <NavLink to="/liked-videos" className="nav-btn sidebar-btn">
+                        <li className="list-item-inline sidebar-list-item">
+                            <img src={like} alt=""></img>
+                            <span className="btn-description">Liked Videos</span>
+                        </li>
+                    </NavLink>
+
+
+                    <NavLink to="/playlist" className="nav-btn sidebar-btn">
+                        <li className="list-item-inline sidebar-list-item">
+                            <img src={playlist} alt=""></img>
+                            <span className="btn-description">Playlist</span>
+                        </li>
+                    </NavLink>
+
+                    {loggedIn ? <NavLink to="/account" className="nav-btn sidebar-btn">
+                        <li className="list-item-inline sidebar-list-item">
+                            <img src={account} alt=""></img>
+                            <span className="btn-description">Account</span>
+                        </li>
+                    </NavLink> : <NavLink to="/login" className="nav-btn sidebar-btn">
+                        <li className="list-item-inline sidebar-list-item">
+                            <img src={login} alt=""></img>
+                            <span className="btn-description">Login</span>
+                        </li>
+                    </NavLink>}
+                </ul>
+            </nav>
+        </Fragment >
     )
 }
 

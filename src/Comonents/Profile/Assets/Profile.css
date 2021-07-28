@@ -1,0 +1,31 @@
+.profile-btn{
+    position: absolute;
+    top:1rem;
+    right:0.5rem;
+    z-index: var(--index-10);
+    background-color: transparent;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    border-radius: 50%;
+    padding:2px;
+    z-index: var(--index-highest);
+    border-radius:50%;
+    background-color:#212121;
+    box-shadow:var(--box-shadow);
+    padding:0.2rem;
+    transform: 0.3s ease;
+}
+.profile-btn:focus{
+    transform:scale(0.98);
+    background-color:#1f1f1f;
+}
+.profile-btn img{
+    margin:0;
+    width:2rem;
+}
+@media only screen and (min-width: 768px){
+    .profile-btn{
+        display:none;
+    }
+}

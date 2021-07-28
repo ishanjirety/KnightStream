@@ -13,6 +13,7 @@
     color:white;
     display:flex;
     position: relative;
+    cursor: pointer;
 }
 .plalist-thumbnail{
     width:50%;
@@ -34,6 +35,9 @@
     text-align:left;
     font-weight:bold;
     align-self: center;
+    color: white;
+    text-decoration: none;
+    display:block;
 }
 .date{
     font-family: 'Roboto', sans-serif;
@@ -41,10 +45,22 @@
     margin-left: 3px;
     color:#c2c2c2
 }
-.fa-ellipsis-v{
-    /* transform:rotate(90deg); */
+.btn-delete{
     position:absolute;
     right:7px;
-    top:7px;
+    top:4px;
     font-size: 1.1rem;
+    background-color:transparent;
+    border:none;
+    border-radius: 50%;
+    transition: 0.3s ease;
+}
+.btn-delete:hover{
+    background-color:rgba(243, 244, 246,0.1);
+}
+@media only screen and (min-width: 768px){
+    .playlist-card{
+        height:7rem;
+        margin-right: 1rem;
+    }
 }

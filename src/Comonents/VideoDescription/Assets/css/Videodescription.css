@@ -1,0 +1,105 @@
+:root{
+    --video-background:#292929;
+    --video-background-rgb : rgb(51, 51, 51);
+    --text-color:#fff;
+}
+.video-card * {
+    font-family: 'Merriweather Sans', sans-serif;
+}
+.video-card-desktop * {
+    font-family: 'Merriweather Sans', sans-serif;
+}
+.video-card-desktop{
+    width:50%;
+    height:auto;
+    background-color: var(--video-background);
+    margin: 0 0.3rem 0.7rem 0;
+    color:white;
+    display:none;
+    flex-direction:column;
+    position: relative;
+    cursor: pointer;
+}
+.video-card{
+    width:100%;
+    height:auto;
+    background-color: var(--video-background);
+    margin: 0 0.3rem 0.7rem 0;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    position: relative;
+    cursor: pointer;
+}
+.video-thumbnail{
+    width:100%;
+    text-align:left;
+    font-weight: lighter;
+    margin-right: 3px;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.video-info{
+    align-self: center;
+    display:flex;
+    flex-direction:column;
+    justify-content: flex-start;    
+    margin:1rem 0.5rem 1rem 1rem;
+    padding-left: 0.5rem;
+    /* padding-right: 1rem; */
+    width:100%;
+}
+.video-text{
+    margin:0;
+    margin-left: 3px;
+    font-size:1rem;
+    font-family: 'Roboto', sans-serif;
+    width:98%;
+    text-align:left;
+    font-weight:bold;
+    align-self: center;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color:var(--text-color)
+
+}
+.date{
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.7rem;
+    margin-left: 3px;
+    color:#c2c2c2;
+    text-align: left;
+    margin-top: 0.5rem;
+}
+.fa-ellipsis-v{
+    /* transform:rotate(90deg); */
+    position:absolute;
+    right:7px;
+    top:7px;
+    font-size: 1.1rem;
+}
+.credits{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    margin-left: 3px;
+    color:#c2c2c2;
+    text-align: left;
+    margin-top: 0.5rem;
+}
+
+@media only screen and (min-width: 768px){
+    .video-card-desktop{
+        display:flex;
+        margin: 0 2rem 0.5rem 0 !important;
+        width:99% !important;
+}
+    .video-card{
+        display:none
+    }
+}
+@media only screen and (max-width: 768px){
+    .video-card-desktop{
+        display:flex !important;
+        width:100%;
+    }   
+}

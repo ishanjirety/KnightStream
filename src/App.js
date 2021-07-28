@@ -1,30 +1,79 @@
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import './App.css';
-import {Nav,Videocard,Splashscreen,Playlistcard} from './Comonents'
-import playlist from './Common-Assets/Playlist.svg'
+import axios from 'axios'
+
+import {Protected} from './ProtectedRoute'
+import {useAuth} from './Context'
+import {getToken,removeToken} from './Token' 
+
+import {Nav,Splashscreen} from './Comonents'
+import {Login,Playlist,Explore,Videodisplay,Liked,Home,NotFound404,PlaylistDisplay,Account,Signup,Forgotpassword} from './Pages'
+import {Routes,Route,useNavigate} from 'react-router-dom'
+
 function App() {
+  
+  // Set Splashscreen Anmation & Visibility
   const [splashScreen,setSplashscreen] = useState("")
   const [SplashscreenDisplay,setSplashscreenDisplay] = useState(true)
+  const {setLoggedin} = useAuth()
+  const navigate = useNavigate()
+
+  useEffect(()=>{
+    (async function setData(){
+        const token = getToken()
+        try{
+          if(token !== null){
+            const headers = {
+              headers: { 
+              'Authorization': token.token, 
+            }
+          }
+            const response = await axios.post('https://KnightStream.ishanjirety.repl.co/api/searchuser',{},headers)  
+            response.data.status ===200 ?  setLoggedin(true) : setLoggedin(false)
+        }
+        else{
+          setLoggedin(false)
+        }
+        }catch(e){
+          console.log(e)
+          if(axios.isAxiosError(e)){
+            if(e.response.status === 401){
+              removeToken()
+              await setLoggedin(false)    
+              navigate('/login')      
+            }
+          }
+        }
+       
+    })()
+  },[])
+  
+
+  // Splash Screen Timeout
   setTimeout(()=>{
     setSplashscreen("fadeout")
     setTimeout(()=>setSplashscreenDisplay(false),4500)
-},4000)
+  },4000)
   
+
   return (
     <div className="App">
       <Nav/>
-      <div className="main-body">
-        <div className="heading"><img src={playlist}/>Playlists</div>
-       <Playlistcard source="https://i.ytimg.com/vi/KGMEhdaZ6ZY/maxresdefault.jpg" text="Lectures"/>
-      <Playlistcard source="https://pbs.twimg.com/media/DxslfAyX4AU1c0o.jpg" text="Tip & Tricks"/>
-      <Playlistcard source="https://i.ytimg.com/vi/jRmiVObwh8k/maxresdefault.jpg" text="Positional Chess"/>
-      <Playlistcard source="http://chessterra.com/wp-content/uploads/2019/07/tAEdKVLgURI-800x500.jpg" text="4 step ahead"/>
-      <Playlistcard source="https://i.ytimg.com/vi/KGMEhdaZ6ZY/maxresdefault.jpg" text="Lectures"/>
-      <Playlistcard source="https://pbs.twimg.com/media/DxslfAyX4AU1c0o.jpg" text="Tip & Tricks"/>
-      <Playlistcard source="https://i.ytimg.com/vi/jRmiVObwh8k/maxresdefault.jpg" text="Positional Chess"/>
-      <Playlistcard source="http://chessterra.com/wp-content/uploads/2019/07/tAEdKVLgURI-800x500.jpg" text="4 step ahead"/>
+      <Routes>
+        <Route path="/" element={<Explore/>}/>
+        <Protected path="/home" element={<Home />}/>
+        <Protected path="/video/:videoId" element={<Videodisplay/>}/>
+        <Protected path="/liked-videos" element={<Liked/>}/>
+        <Protected path="/playlist" element={<Playlist/>}/>
+        <Protected path="/account" element={<Account/>} />
+        <Route path="/playlist/:playlistId" element={<PlaylistDisplay/>}></Route>
+        <Route path='/login' element={<Login/>}/>
+        <Route path="/signup" element={<Signup/>}/>
+        <Route path="/forgot-password" element={<Forgotpassword/>}/>
+        <Route path="*" element={<NotFound404/>}/>
+
+      </Routes>
       {SplashscreenDisplay && <Splashscreen animation ={splashScreen}/>}
-      </div>
     </div>
   );
 }

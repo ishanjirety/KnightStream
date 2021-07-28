@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Carter+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 :root{
     --screen-background:#212121;
     --logo-color:#E2E2E2;
-    --text-color-logo:#bca035;
+    --text-color-logo:#f9f9f9;
 }
 .splashscreen{
     height:100vh;
@@ -10,13 +11,14 @@
     position: fixed;
     top:0;
     z-index: var(--highest-index);
+    display:flex;
 }
 .splashscreen .cover{
-    position: absolute;
-    width:100vw;
-    height:109vh;
-    top:-10%;
-    left:0;
+    position: fixed;
+    width:100%;
+    height:100%;
+    /* top:-10%;
+    left:0; */
     display:flex;
     justify-content: left;
 }
@@ -34,11 +36,14 @@
 }
 .logo-area{
     position: absolute;
-    font-family: 'Carter One', cursive;
     font-size: 2.2rem;
-    color:var(--logo-color);
+    /* color:var(--logo-color); */
+    color:#f9f9f9 !important;
+    font-family: 'Fredoka One', cursive;
+    text-shadow:  -3px 0px 5px #686565;
+    line-height: 2.4rem;
     top:39.5%;
-    left:25%;
+    left:18%;
     display:flex;
     justify-content: left;
     overflow:hidden;
@@ -75,12 +80,18 @@
         transform:rotate(360deg)
     }
 }
-@media (min-width:411px){
-    .logo-image{
-        left:11%;
+@media only screen and (min-width:768px){
+  
+    .splashscreen{
+        overflow: hidden;
     }
-    .logo{
-        left:27%;
+    .logo-area{
+        display:flex;
+        justify-content: left;
+        width:20rem;
+        transform: translatex(50%);
+        font-size: 3rem;
+        line-height:3.2rem;
     }
 }
 @keyframes fadeout{
@@ -97,7 +108,4 @@
             height: 0; 
             z-index: -1; 
         }
-}
-.xyz{
-    /* To remove */
 }

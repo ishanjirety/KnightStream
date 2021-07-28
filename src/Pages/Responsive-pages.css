@@ -1,0 +1,75 @@
+@media only screen and (min-width: 768px){
+    .list-playlist{
+        display: grid;
+        grid-template-columns: 1fr 1fr ;
+        padding:0
+    }
+    .video-home{
+        display:grid;
+        grid-template-columns: 1fr 1fr 1fr ;
+        padding:1rem;
+    }
+    .video-wrapper{
+        grid-area: main-body;
+    }
+    .display-items{
+        overflow-y: hidden;
+    }
+    .nav-options-link{
+        right:3rem
+    }
+    .liked{
+        overflow-x: hidden;
+        display:grid;
+        grid-template-columns: 1fr 1fr 1fr
+    }
+    .liked .video-card-desktop{
+        display:inline-block;
+        width:18rem !important
+    }
+    .liked .video-info{
+        width:90%;
+        margin-left:0.5rem;
+    }
+    .login{
+        background-image: url(./Images/bg-texture.svg);
+    }
+    .login-card{
+        width:30%;
+    }
+    .logout-btn{
+        top:1rem;
+    }
+}
+@media only screen and (max-width: 768px){
+    .list-playlist{
+        padding:0
+    }
+    .video-home{
+        padding:0
+    }
+    .video-wrapper{
+        flex-wrap: wrap;
+    }
+    textarea{
+        height:6.3rem;
+    }
+    .note-controlls{
+        height:3.5rem;
+    }
+    .saved-display{
+        right:1rem;
+        /* top:300%; */
+        top:1rem;  
+    }
+    .liked{
+        flex-wrap: wrap;
+    }
+    .display-items{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .login{
+        background-image: url(./Images/bg-texture-mobile.svg);
+    }
+}
